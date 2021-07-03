@@ -2,6 +2,9 @@
 
 {% block body %}
     <div class="login">
+        {% if message %}
+            <h5>{{ message }}</h5>
+        {% endif %}
         <h4>Login</h4>
         <form action="{% url 'login' %}" method=POST>
             {% csrf_token %}
@@ -11,7 +14,7 @@
     </div>
     <div class=register>
         <h4>Register</h4>
-        <form action="/register" method=POST>
+        <form action="{% url 'register' %}" method=POST>
             {% csrf_token %}
             {{ userForm.as_p }}
             <p>

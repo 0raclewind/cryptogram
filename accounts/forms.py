@@ -9,3 +9,14 @@ class UserForm(forms.ModelForm):
             "username",
             "password"
         ]
+
+        help_texts = {
+            'username': None,
+            'password': None
+        }
+
+        widgets = {
+            'password': forms.TextInput(attrs={
+                'type': 'password'
+            })
+        }

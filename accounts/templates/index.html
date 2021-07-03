@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <h4>This is index</h4>
-    <a href="{% url 'login' %}">Login</a>
+    <h4>Welcome, {{ username }}</h4>
+    <a href="{% url 'logout' %}">Logout</a>
 {% endblock body %}

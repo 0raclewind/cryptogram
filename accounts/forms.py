@@ -29,8 +29,3 @@ class ProfileForm(forms.ModelForm):
             'last_name',
             'email'
         ]
-
-class PasswordForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['password']

@@ -1,7 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <h4>Welcome, {{ username }}</h4>
-    <a href="{% url 'profile' %}">Profile</a>
-    <a href="{% url 'logout' %}">Logout</a>
+    {% if user.first_name %}
+        <h4>Welcome, {{ user.first_name }} {{ user.last_name }}</h4>
+    {% else %}
+        <h4>Welcome, {{ user }}</h4>
+    {% endif %}
 {% endblock body %}

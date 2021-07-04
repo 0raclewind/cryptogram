@@ -1,10 +1,24 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <h2>{{ request.user }} profile page</h2>
+    <h2>{{ user }} profile page</h2>
     <form action="/profile" method=POST>
         {% csrf_token %}
         {{ p_form.as_p }}
+        <hr>
+        <p>
+            <label for="password">Current password</label>
+            <input type="password" id=password name=password>
+        </p>
+        <p>
+            <label for="new_pass">New password</label>
+            <input type="password" id=new_pass name=new_pass>
+        </p>
+        <p>
+            <label for="confirmation">Re-enter new password</label>
+            <input type="password" id=confirmation name=confirmation>
+        </p>
+        <br>
         <input type="submit" value="Update">
     </form>
 {% endblock body %}

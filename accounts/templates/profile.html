@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h2>{{ request.user }} profile page</h2>
+    <form action="/profile" method=POST>
+        {% csrf_token %}
+        {{ p_form.as_p }}
+        <input type="submit" value="Update">
+    </form>
+{% endblock body %}

@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from .models import User
-from .forms import UserForm
+from .forms import UserForm, ProfileForm, PasswordForm
 
 @login_required
 def index(request):
@@ -23,9 +23,7 @@ def login_view(request):
         password = request.POST["password"]
 
         user = authenticate(username=username, password=password)
-        print(username)
-        print(password)
-        print(user)
+
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse('index'))
@@ -62,3 +60,16 @@ def register(request):
     login(request, user)
 
     return HttpResponseRedirect(reverse('index'))
+
+@login_required
+def profile_view(request):
+    if request.method == "POST":
+        p_form = ProfileForm(request.POST, instance=request.user)
+        if p_form.is_valid():
+            p_form.save()
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        p_form = ProfileForm(instance=request.user)
+        return render(request, "profile.html", {
+            "p_form": p_form,
+        })

@@ -20,3 +20,17 @@ class UserForm(forms.ModelForm):
                 'type': 'password'
             })
         }
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name',
+            'email'
+        ]
+
+class PasswordForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['password']

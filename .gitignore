@@ -4,3 +4,4 @@ migrations
 __pycache__
 __init__.py
 .env
+api_tests

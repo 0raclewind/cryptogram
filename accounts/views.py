@@ -78,10 +78,7 @@ def profile_view(request):
                 u.save()
                 new_user = authenticate(username=request.user, password=new_pass)
                 login(request, new_user)
-                print("Password changed")
-            else:
-                print("Password not changed")
-            return HttpResponseRedirect(reverse('profile'))
+            return HttpResponseRedirect(reverse('index'))
     else:
         p_form = ProfileForm(instance=request.user)
         return render(request, "profile.html", {

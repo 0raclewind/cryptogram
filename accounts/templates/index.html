@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block body %}
     {% if user.first_name %}
@@ -6,4 +7,13 @@
     {% else %}
         <h4>Welcome, {{ user }}</h4>
     {% endif %}
+    <div class="entries">
+    </div>
+    <div class="loading-div">
+        <div class="loading"><div></div><div></div><div></div></div>
+    </div>
 {% endblock body %}
+
+{% block script %}
+    <script src="{% static 'script/index.js' %}"></script>
+{% endblock script %}

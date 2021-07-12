@@ -10,6 +10,7 @@ from django.shortcuts import render
 from .models import User
 from .forms import UserForm, ProfileForm
 
+
 @login_required
 def index(request):
     return render(request, "index.html")

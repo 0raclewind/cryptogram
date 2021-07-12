@@ -11,6 +11,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
             load_assets(page_number);
         }
     });
+    // document.querySelector('h2').addEventListener('click', () => {
+    //     location.href = "/profile"
+    // })
+
+
 })
 
 // Get 20 entries
@@ -29,6 +34,14 @@ function load_assets(page) {
                 display_entry(symbol, name, change, price);
             });
             page_number += 1;
+        })
+        .then(() => {
+            document.querySelectorAll(".entry").forEach(entry => {
+                entry.addEventListener('click', () => {
+                    let symbol = entry.querySelector(".symbol").innerHTML;
+                    console.log(symbol);
+                });
+            })
         })
 }
 
@@ -52,10 +65,13 @@ function display_entry(symbol, name, change, price) {
     symbol_div.innerHTML = symbol;
     name_div.innerHTML = name;
     if (change < 0) {
-        change_div.innerHTML = '<i class="fas fa-arrow-alt-circle-down"></i>'
+        change_div.innerHTML = '<i class="fas fa-arrow-alt-circle-down"></i>';
+    } else if (change > 0) {
+        change_div.innerHTML = '<i class="fas fa-arrow-alt-circle-up"></i>';
     } else {
-        change_div.innerHTML = '<i class="fas fa-arrow-alt-circle-up"></i>'
+        change_div.innerHTML = '<i class="fas fa-minus-circle"></i>';
     }
+
     price_div.innerHTML = "$" + price.toFixed(2);
 
     entry_div.appendChild(symbol_div);

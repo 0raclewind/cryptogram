@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 // Get 20 entries
 function load_assets(page) {
     const assets = `https://data.messari.io/api/v2/assets?page=${page}&fields=name,symbol,metrics/market_data/percent_change_usd_last_1_hour,metrics/market_data/price_usd`;
-    fetch(assets)
+    const assets_mock = 'https://localhost:3000/assets';
+    fetch(assets_mock)
         .then(response => {
             return response.json();
         })
@@ -39,7 +40,6 @@ function load_assets(page) {
             document.querySelectorAll(".entry").forEach(entry => {
                 entry.addEventListener('click', () => {
                     let symbol = entry.querySelector(".symbol").innerHTML;
-                    console.log(symbol);
                 });
             })
         })

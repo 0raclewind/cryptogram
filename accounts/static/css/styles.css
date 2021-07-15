@@ -18,6 +18,11 @@ body {
     margin: 2px auto 2px auto;
 }
 
+.entry:hover {
+    cursor: pointer;
+    background-color: #eee;
+}
+
 .entry .symbol {
     width: 70px;
     font-weight: 600;

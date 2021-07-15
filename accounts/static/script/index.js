@@ -11,18 +11,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             load_assets(page_number);
         }
     });
-    // document.querySelector('h2').addEventListener('click', () => {
-    //     location.href = "/profile"
-    // })
-
-
 })
 
 // Get 20 entries
 function load_assets(page) {
-    const assets = `https://data.messari.io/api/v2/assets?page=${page}&fields=name,symbol,metrics/market_data/percent_change_usd_last_1_hour,metrics/market_data/price_usd`;
+    const assets = `https://data.messari.io/api/v2/assets?page=${page}&fields=name,slug,symbol,metrics/market_data/percent_change_usd_last_1_hour,metrics/market_data/price_usd`;
     const assets_mock = 'https://localhost:3000/assets';
-    fetch(assets_mock)
+    fetch(assets)
         .then(response => {
             return response.json();
         })
@@ -32,21 +27,22 @@ function load_assets(page) {
                 const name = entry.name;
                 const change = entry.metrics.market_data.percent_change_usd_last_1_hour;
                 const price = entry.metrics.market_data.price_usd;
-                display_entry(symbol, name, change, price);
+                display_entry(symbol, name, change, price, entry.slug);
             });
             page_number += 1;
         })
         .then(() => {
             document.querySelectorAll(".entry").forEach(entry => {
                 entry.addEventListener('click', () => {
-                    let symbol = entry.querySelector(".symbol").innerHTML;
+                    let slug = entry.dataset.slug
+                    asset_history(slug);
                 });
             })
         })
 }
 
 // Display loaded entries
-function display_entry(symbol, name, change, price) {
+function display_entry(symbol, name, change, price, slug) {
     // Define required divs
     let entry_div = document.createElement('div');
     let symbol_div = document.createElement('div');
@@ -56,6 +52,7 @@ function display_entry(symbol, name, change, price) {
 
     // Define divs classes
     entry_div.classList = "entry";
+    entry_div.dataset.slug = slug;
     symbol_div.classList = "symbol";
     name_div.classList = "name";
     change_div.classList = "change";
@@ -81,4 +78,22 @@ function display_entry(symbol, name, change, price) {
 
     entries.appendChild(entry_div);
 
+}
+
+function asset_history(slug, timeframe = 0) {
+    let start = '';
+    if (timeframe == '1m') {
+
+    } else if (timeframe == '1y') {
+
+    } else {
+        start = new Date();
+    }
+    console.log(start);
+    const history = `https://data.messari.io/api/v1/assets/${slug}/metrics/price/time-series?start=2021-07-01&interval=1d&timestamp-format=rfc3339`;
+    fetch(history)
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+        })
 }

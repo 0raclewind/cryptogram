@@ -2,6 +2,19 @@ body {
     padding: 10px;
 }
 
+.display {
+    display: flex;
+    width: 420px;
+    margin: 0 auto 0 auto;
+    overflow: hidden;
+}
+
+.entries_field {
+    transition: ease-in-out 300ms;
+    z-index: 2;
+    background-color: #fff;
+}
+
 .entries {
     width: 420px;
     margin: 0 auto 0 auto;
@@ -42,6 +55,21 @@ body {
 
 .entry .price {
     width: 85px;
+}
+
+.info_field {
+    z-index: 1;
+    width: 420px;
+    height: 500px;
+    border:1px solid #aaa;
+    position: fixed;
+}
+
+.backBtn {
+    font-size: 30px;
+    cursor: pointer;
+    width: 50px;
+    text-align: center;
 }
 
 /* Entry loading animation */

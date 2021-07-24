@@ -85,3 +85,8 @@ def profile_view(request):
         return render(request, "profile.html", {
             "p_form": p_form
         })
+
+def info_view(request, slug):
+    return render(request, 'info.html', {
+        'slug': slug
+    })

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function load_assets(page) {
     const assets = `https://data.messari.io/api/v2/assets?page=${page}&fields=name,slug,symbol,metrics/market_data/percent_change_usd_last_1_hour,metrics/market_data/price_usd`;
     const assets_mock = 'https://localhost:3000/assets';
-    fetch(assets)
+    fetch(assets_mock)
         .then(response => {
             return response.json();
         })
@@ -34,8 +34,9 @@ function load_assets(page) {
         .then(() => {
             document.querySelectorAll(".entry").forEach(entry => {
                 entry.addEventListener('click', () => {
-                    let slug = entry.dataset.slug
-                    asset_history(slug);
+                    let slug = entry.dataset.slug;
+                    display_info(slug);
+                    // asset_history(slug);
                 });
             })
         })
@@ -44,7 +45,7 @@ function load_assets(page) {
 // Display loaded entries
 function display_entry(symbol, name, change, price, slug) {
     // Define required divs
-    let entry_div = document.createElement('div');
+    let entry_div = document.createElement('a');
     let symbol_div = document.createElement('div');
     let name_div = document.createElement('div');
     let change_div = document.createElement('div');
@@ -52,7 +53,7 @@ function display_entry(symbol, name, change, price, slug) {
 
     // Define divs classes
     entry_div.classList = "entry";
-    entry_div.dataset.slug = slug;
+    entry_div.href = `info/${slug}`;
     symbol_div.classList = "symbol";
     name_div.classList = "name";
     change_div.classList = "change";
@@ -78,22 +79,4 @@ function display_entry(symbol, name, change, price, slug) {
 
     entries.appendChild(entry_div);
 
-}
-
-function asset_history(slug, timeframe = 0) {
-    let start = '';
-    if (timeframe == '1m') {
-
-    } else if (timeframe == '1y') {
-
-    } else {
-        start = new Date();
-    }
-    console.log(start);
-    const history = `https://data.messari.io/api/v1/assets/${slug}/metrics/price/time-series?start=2021-07-01&interval=1d&timestamp-format=rfc3339`;
-    fetch(history)
-        .then(response => response.json())
-        .then(json => {
-            console.log(json);
-        })
 }

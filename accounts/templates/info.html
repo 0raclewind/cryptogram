@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block body %}
+    <input type="hidden" id=slug value="{{ slug }}">
+    <div class="asset_profile">
+        <div class="head">
+            <div class="symbol"></div>
+            <div class="name"></div>
+        </div>
+        <div class="chart"></div>
+        <div class="info">
+            
+        </div>
+    </div>
+{% endblock body %}
+
+{% block script %}
+    <script src="{% static 'script/info.js' %}"></script>
+{% endblock script %}

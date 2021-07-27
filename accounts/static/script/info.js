@@ -22,11 +22,14 @@ function asset_history(slug, timeframe = 0) {
 }
 
 function display_info(slug) {
-    const asset_profile_url = `https://data.messari.io/api/v2/assets/${slug}/profile`;
+    const tagline = 'profile/general/overview/tagline';
+    const fields = `name,symbol,${tagline}`;
+    const asset_profile = `https://data.messari.io/api/v2/assets/${slug}/profile?fields=${fields}`;
+    const asset_profile_mock = 'https://localhost:3000/profile';
 
-    fetch(asset_profile_url)
+    fetch(asset_profile)
         .then(response => response.json())
         .then(json => {
-            console.log(json);
+            console.log(json.data.profile);
         })
 }

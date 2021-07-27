@@ -25,8 +25,8 @@ function display_info(slug) {
     const asset_profile_url = `https://data.messari.io/api/v2/assets/${slug}/profile`;
 
     fetch(asset_profile_url)
-    .then(response => response.json())
-    .then(json => {
-        console.log(json);
-    })
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+        })
 }

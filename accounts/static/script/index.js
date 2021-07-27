@@ -1,13 +1,10 @@
+// Initiate page number for loading assets
 let page_number = 1;
-const full_assets = 'https://data.messari.io/api/v2/assets';
-const entries = document.querySelector(".entries");
-
 
 document.addEventListener('DOMContentLoaded', (event) => {
     load_assets(page_number);
     document.addEventListener('scroll', () => {
         if (document.body.clientHeight == (window.pageYOffset + window.innerHeight)) {
-
             load_assets(page_number);
         }
     });
@@ -44,6 +41,7 @@ function load_assets(page) {
 
 // Display loaded entries
 function display_entry(symbol, name, change, price, slug) {
+    const entries = document.querySelector(".entries");
     // Define required divs
     let entry_div = document.createElement('a');
     let symbol_div = document.createElement('div');

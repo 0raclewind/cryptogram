@@ -2,16 +2,25 @@
 {% load static %}
 
 {% block body %}
-    <input type="hidden" id=slug value="{{ slug }}">
-    <div class="asset_profile">
+    <div class="asset_profile" hidden>
         <div class="head">
             <div class="symbol"></div>
             <div class="name"></div>
         </div>
         <div class="chart"></div>
         <div class="info">
-            
+            <div class="tagline"></div>
+            <div class="overview">
+                <div class="title">Overview</div>
+                <p class="text"></p>
+            </div>
+            <div class="resources">
+                <div class="title">Official links</div>
+            </div>
         </div>
+    </div>
+    <div class="loading-div">
+        <div class="loading"><div></div><div></div><div></div></div>
     </div>
 {% endblock body %}
 

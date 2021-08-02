@@ -87,6 +87,4 @@ def profile_view(request):
         })
 
 def info_view(request, slug):
-    return render(request, 'info.html', {
-        'slug': slug
-    })
+    return render(request, 'info.html')

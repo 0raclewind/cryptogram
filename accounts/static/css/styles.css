@@ -1,15 +1,15 @@
 body {
     padding: 10px;
     background-color: #012235;
+    color: #aaa;
 }
 
 a {
     text-decoration: none;
 }
 
-.title {
+.page-title {
     text-align: center;
-    color: #aaa;
     font-size: 26px;
 }
 

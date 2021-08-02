@@ -43,15 +43,15 @@ function load_assets(page) {
 function display_entry(symbol, name, change, price, slug) {
     const entries = document.querySelector(".entries");
     // Define required divs
-    let entry_div = document.createElement('a');
+    let entry_a = document.createElement('a');
     let symbol_div = document.createElement('div');
     let name_div = document.createElement('div');
     let change_div = document.createElement('div');
     let price_div = document.createElement('div');
 
     // Define divs classes
-    entry_div.classList = "entry";
-    entry_div.href = `info/${slug}`;
+    entry_a.classList = "entry";
+    entry_a.href = `info/${slug}`;
     symbol_div.classList = "symbol";
     name_div.classList = "name";
     change_div.classList = "change";
@@ -70,11 +70,11 @@ function display_entry(symbol, name, change, price, slug) {
 
     price_div.innerHTML = "$" + price.toFixed(2);
 
-    entry_div.appendChild(symbol_div);
-    entry_div.appendChild(name_div);
-    entry_div.appendChild(change_div);
-    entry_div.appendChild(price_div);
+    entry_a.appendChild(symbol_div);
+    entry_a.appendChild(name_div);
+    entry_a.appendChild(change_div);
+    entry_a.appendChild(price_div);
 
-    entries.appendChild(entry_div);
+    entries.appendChild(entry_a);
 
 }

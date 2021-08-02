@@ -4,10 +4,15 @@
 {% block body %}
     <div class="asset_profile" hidden>
         <div class="head">
-            <div class="symbol"></div>
-            <div class="name"></div>
+            <div>
+                <div class="name"></div>
+                <div class="symbol"></div>
+            </div>
+            <div class="price"></div>
         </div>
-        <div class="chart"></div>
+        <div class="chart">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
         <div class="info">
             <div class="tagline"></div>
             <div class="overview">
@@ -17,6 +22,24 @@
             <div class="resources">
                 <div class="title">Official links</div>
             </div>
+            <div class="market-stats">
+                <div class="market-cap">
+                    <div class="stats-title">Market cap</div>
+                    <div class="value"></div>
+                </div>
+                <div class="volume">
+                    <div class="stats-title">Volume 24h</div>
+                    <div class=value></div>
+                </div>
+                <div class="supply">
+                    <div class="stats-title">Circulating supply</div>
+                    <div class="value"></div>
+                </div>
+                <div class="high">
+                    <div class="stats-title">All time high</div>
+                    <div class="value"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="loading-div">
@@ -25,5 +48,6 @@
 {% endblock body %}
 
 {% block script %}
+    <script src="{% static 'script/chart.js-3.5.0/dist/chart.min.js' %}"></script>
     <script src="{% static 'script/info.js' %}"></script>
 {% endblock script %}

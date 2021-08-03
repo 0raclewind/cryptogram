@@ -1,22 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
     const slug = window.location.pathname.split('/')[2];
+    const buttons = document.querySelectorAll(".time-buttons div");
     display_info(slug)
 
+    // Timeframe buttons
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            asset_history(slug, dateCalc(button.dataset.time))
+
+            buttons.forEach(btn => {
+                btn.classList.remove("active")
+            })
+            button.classList.add("active")
+        })
+    })
 });
 
 function asset_history(slug, timeframe = 0) {
-    let start = '';
-    if (timeframe == '1m') {
-
-    } else if (timeframe == '1y') {
-
-    } else {
-        start = new Date();
-    }
-
-    const history = `https://data.messari.io/api/v1/assets/${slug}/metrics/price/time-series?start=2021-07-01&interval=1d&timestamp-format=rfc3339&fields=values`;
+    const history_url = `https://data.messari.io/api/v1/assets/${slug}/metrics/price/time-series?start=${timeframe}&interval=1d&timestamp-format=rfc3339&fields=values`;
     const history_mock = 'https://localhost:3000/asset_history';
-    fetch(history_mock)
+    fetch(history_url)
         .then(response => response.json())
         .then(json => {
             let labels = []
@@ -29,6 +32,10 @@ function asset_history(slug, timeframe = 0) {
             });
             render_chart(labels, data);
         })
+        .then(() => {
+            document.querySelector('.asset_profile').hidden = false;
+            document.querySelector('.loading-div').hidden = true;
+        })
 }
 
 function display_info(slug) {
@@ -37,15 +44,13 @@ function display_info(slug) {
 
     let profile = document.querySelector('.asset_profile');
 
-    fetch(asset_profile_mock)
+    fetch(asset_profile_url)
         .then(response => response.json())
         .then(json => {
             profile.querySelector('.symbol').innerHTML = json.data.symbol;
             profile.querySelector('.name').innerHTML = json.data.name;
             // profile.querySelector('.tagline').innerHTML = json.data.profile.general.overview.tagline;
             profile.querySelector('.text').innerHTML = json.data.profile.general.overview.project_details;
-
-            let resources = profile.querySelector('.resources');
 
             // Append links to DOM
             json.data.profile.general.overview.official_links.forEach(link => {
@@ -61,22 +66,31 @@ function display_info(slug) {
                     icon = '<i class="fab fa-telegram"></i> '
                 } else if (link.name == "Reddit") {
                     icon = '<i class="fab fa-reddit"></i> '
-                } else {
-                    icon = '<i class="fas fa-question-circle"></i> '
+                } else if (link.name == "Website") {
+                    icon = '<i class="fas fa-globe"></i> '
+                } else if (link.name == "Blog") {
+                    icon = '<i class="fas fa-blog"></i> '
+                } else if (link.name == "Medium") {
+                    icon = '<i class="fab fa-medium"></i> '
+                } else if (link.name == "Litepaper") {
+                    icon = '<i class="far fa-sticky-note"></i> '
                 }
                 a_tag.href = link.link;
                 a_tag.innerHTML = icon + link.name;
-                resources.appendChild(a_tag);
+                profile.querySelector('.resources .links').appendChild(a_tag);
             })
         })
         .then(() => {
-            asset_history(slug)
+            asset_history(slug, dateCalc(7))
             asset_metrics(slug)
         })
 }
 
 function render_chart(labels, data) {
-    let ctx = document.getElementById('myChart');
+    // let ctx = document.getElementById('myChart');
+    let canvas = document.querySelector("#myChart");
+    let ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -95,13 +109,18 @@ function render_chart(labels, data) {
             }
         }
     });
+    document.querySelectorAll(".time-buttons div").forEach(button => {
+        button.addEventListener('click', () => {
+            myChart.destroy()
+        })
+    })
 }
 
 function asset_metrics(slug) {
-    let metrics_url = `https://data.messari.io/api/v1/assets/${slug}/metrics?fields=all_time_high/price,marketcap/current_marketcap_usd,market_data/price_usd,supply/circulating,market_data/volume_last_24_hours`;
+    const metrics_url = `https://data.messari.io/api/v1/assets/${slug}/metrics?fields=all_time_high/price,marketcap/current_marketcap_usd,market_data/price_usd,supply/circulating,market_data/volume_last_24_hours`;
     const metrics_mock = 'https://localhost:3000/metrics';
 
-    fetch(metrics_mock)
+    fetch(metrics_url)
         .then(response => response.json())
         .then(json => {
             let price = json.data.market_data.price_usd;
@@ -116,13 +135,38 @@ function asset_metrics(slug) {
             document.querySelector(".supply .value").innerHTML = displayBigNumber(supply);
             document.querySelector(".high .value").innerHTML = displayDollars(high)
         })
-        .then(() => {
-            document.querySelector('.asset_profile').hidden = false;
-        })
 }
 
+// function asset_news(slug) {
+//     const news_url = `https://data.messari.io/api/v1/news/${slug}`
+//     const news_mock = 'https://localhost:3000/news'
+
+//     fetch('https://data.messari.io/api/v1/news?fields=title,content,author/name')
+//         .then(response => response.json())
+//         .then(json => {
+//             console.log(json);
+//         })
+// }
+
+function dateCalc(time) {
+    let today = new Date()
+
+    // 86400000ms in a day
+    // multiplied by days needed
+    // 3600000ms = 1h for time zone correction
+    let days = 86400000 * time - 3600000
+    let newDate = new Date(today - days)
+
+    return newDate.toISOString().split("T")[0]
+}
+
+
 function displayDollars(number) {
-    return "$" + number.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    if (number) {
+        return "$" + number.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    } else {
+        return "-"
+    }
 }
 
 function displayBigNumber(number) {

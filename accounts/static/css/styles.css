@@ -1,5 +1,5 @@
 body {
-    padding: 10px;
+    padding: 5px;
     background-color: #012235;
     color: #aaa;
 }
@@ -31,7 +31,7 @@ a {
 
 .display {
     display: flex;
-    width: 420px;
+    width: 360px;
     margin: 0 auto 0 auto;
     overflow: hidden;
 }
@@ -97,11 +97,105 @@ a {
 
 .asset_profile {
     margin: 0 auto 0 auto;
-    width: 600px;
+    width: 350px;
+}
+
+.asset_profile .chart, .overview, .info .resources, .info .market-stats {
+    padding: 10px;
+    background-color: #022d46;
+    border-radius: 10px;
+}
+
+.asset_profile .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 15px;
+}
+
+.asset_profile .head .name {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 0.6;
+    padding-top: 10px;
+}
+
+.asset_profile .head .price {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.chart canvas {
+    height: 300px;
+}
+
+.info {
+    margin-top: 10px;
+}
+
+.info .title {
+    font-size: 16px;
+    font-weight: 600;
+    padding-left: 10px;
+    text-transform: uppercase;
+}
+
+.info .text {
+    font-size: 14px;
 }
 
 
+.info .resources {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
 
+.info .resources a {
+    width: 150px;
+    padding: 5px;
+    color: #aaa;
+}
+
+.market-stats {
+    margin-top: 10px;
+}
+
+.market-stats .stats {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-flow: row wrap;
+    height: 140px;
+}
+
+.market-stats .stats-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.market-stats .stats > * {
+    background-color: #013350;
+    flex: 0 0 45%;
+    text-align: center;
+    padding: 5px;
+    display: flex;
+    border-radius: 10px;
+    flex-flow: row wrap;
+    align-items: center;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.market-stats .stats > * .icon {
+    flex-basis: 20%;
+    font-size: 20px;
+}
+
+.market-stats .stats > * :nth-child(2) {
+    flex-basis: 80%;
+}
 
 /* Entry loading animation */
 .loading-div {
@@ -145,5 +239,23 @@ a {
     50%, 100% {
         top: 20px;
         height: 20px;
+    }
+}
+
+@media screen and (min-width: 400px) {
+    .asset_profile {
+        width: 390px;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .asset_profile {
+        width: 470px;
+    }
+}
+
+@media screen and (min-width: 560px) {
+    .asset_profile {
+        width: 550px;
     }
 }

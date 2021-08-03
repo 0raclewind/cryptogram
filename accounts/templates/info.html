@@ -11,33 +11,56 @@
             <div class="price"></div>
         </div>
         <div class="chart">
-            <canvas id="myChart" width="400" height="400"></canvas>
+            <canvas id="myChart"></canvas>
         </div>
         <div class="info">
-            <div class="tagline"></div>
-            <div class="overview">
+            <!-- <div class="tagline"></div> -->
+            <div class="overview" hidden>
                 <div class="title">Overview</div>
-                <p class="text"></p>
+                <div class="text"></div>
             </div>
             <div class="resources">
                 <div class="title">Official links</div>
             </div>
             <div class="market-stats">
-                <div class="market-cap">
-                    <div class="stats-title">Market cap</div>
-                    <div class="value"></div>
-                </div>
-                <div class="volume">
-                    <div class="stats-title">Volume 24h</div>
-                    <div class=value></div>
-                </div>
-                <div class="supply">
-                    <div class="stats-title">Circulating supply</div>
-                    <div class="value"></div>
-                </div>
-                <div class="high">
-                    <div class="stats-title">All time high</div>
-                    <div class="value"></div>
+                <div class="title">Market stats</div>
+                <div class="stats">
+                    <div class="market-cap">
+                        <div class="icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <div class="stats-title">MARKET CAP</div>
+                            <div class="value"></div>
+                        </div>
+                    </div>
+                    <div class="volume">
+                        <div class="icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div>
+                            <div class="stats-title">Volume 24h</div>
+                            <div class=value></div>
+                        </div>
+                    </div>
+                    <div class="supply">
+                        <div class="icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div>
+                            <div class="stats-title">Circulating supply</div>
+                            <div class="value"></div>
+                        </div>
+                    </div>
+                    <div class="high">
+                        <div class="icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div>
+                            <div class="stats-title">All time high</div>
+                            <div class="value"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

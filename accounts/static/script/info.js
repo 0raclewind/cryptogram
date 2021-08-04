@@ -1,13 +1,14 @@
+// Global constant SLUG variable
+const slug = window.location.pathname.split('/')[2];
+
 document.addEventListener('DOMContentLoaded', () => {
-    const slug = window.location.pathname.split('/')[2];
     const buttons = document.querySelectorAll(".time-buttons div");
     display_info(slug)
 
-    // Timeframe buttons
+    // Timeframe buttons highlight
     buttons.forEach(button => {
         button.addEventListener('click', () => {
-            asset_history(slug, dateCalc(button.dataset.time))
-
+            asset_history(dateCalc(button.dataset.time))
             buttons.forEach(btn => {
                 btn.classList.remove("active")
             })
@@ -16,21 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 });
 
-function asset_history(slug, timeframe = 0) {
+function asset_history(timeframe = 0) {
     const history_url = `https://data.messari.io/api/v1/assets/${slug}/metrics/price/time-series?start=${timeframe}&interval=1d&timestamp-format=rfc3339&fields=values`;
     const history_mock = 'https://localhost:3000/asset_history';
+    let values = { labels: [], data: [] }
+
     fetch(history_url)
         .then(response => response.json())
         .then(json => {
-            let labels = []
-            let data = []
 
             json.data.values.forEach(value => {
-                labels.push(value[0].split('T')[0])
+                values.labels.push(value[0].split('T')[0])
                 let avg = (value[1] + value[2] + value[3] + value[4]) / 4
-                data.push(avg.toFixed(2))
+                values.data.push(avg.toFixed(2))
             });
-            render_chart(labels, data);
+            render_chart(values);
         })
         .then(() => {
             document.querySelector('.asset_profile').hidden = false;
@@ -38,7 +39,7 @@ function asset_history(slug, timeframe = 0) {
         })
 }
 
-function display_info(slug) {
+function display_info() {
     const asset_profile_url = `https://data.messari.io/api/v2/assets/${slug}/profile?fields=name,symbol,profile/general/overview/tagline,profile/general/overview/project_details,profile/general/overview/official_links`;
     const asset_profile_mock = 'https://localhost:3000/profile';
 
@@ -81,22 +82,22 @@ function display_info(slug) {
             })
         })
         .then(() => {
-            asset_history(slug, dateCalc(7))
-            asset_metrics(slug)
+            asset_history(dateCalc(7))
+            asset_metrics()
         })
 }
 
-function render_chart(labels, data) {
+function render_chart(values) {
     // let ctx = document.getElementById('myChart');
     let canvas = document.querySelector("#myChart");
     let ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // ctx.clearRect(0, 0, canvas.width, canvas.height);
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: labels,
+            labels: values.labels,
             datasets: [{
-                data: data,
+                data: values.data,
                 borderColor: "#aaa",
                 pointRadius: 0
             }]
@@ -116,7 +117,7 @@ function render_chart(labels, data) {
     })
 }
 
-function asset_metrics(slug) {
+function asset_metrics() {
     const metrics_url = `https://data.messari.io/api/v1/assets/${slug}/metrics?fields=all_time_high/price,marketcap/current_marketcap_usd,market_data/price_usd,supply/circulating,market_data/volume_last_24_hours`;
     const metrics_mock = 'https://localhost:3000/metrics';
 
@@ -160,14 +161,6 @@ function dateCalc(time) {
     return newDate.toISOString().split("T")[0]
 }
 
-
-function displayDollars(number) {
-    if (number) {
-        return "$" + number.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    } else {
-        return "-"
-    }
-}
 
 function displayBigNumber(number) {
     // Nine Zeroes for Billions

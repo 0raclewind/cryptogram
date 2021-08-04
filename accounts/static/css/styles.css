@@ -43,7 +43,7 @@ a {
 
 .entry  {
     display: flex;
-    border: 2px solid #aaa;
+    background-color: #022d46;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
@@ -56,7 +56,10 @@ a {
     cursor: pointer;
     background-color: #044971;
     color: #eee;
-    border: 2px solid #eee;
+}
+
+.entry .icon {
+    height: 23px;
 }
 
 .entry .symbol {
@@ -68,11 +71,11 @@ a {
     margin-left: auto;
 }
 
-.fa-arrow-alt-circle-up {
+.entry .up {
     color: green;
 }
 
-.fa-arrow-alt-circle-down {
+.entry .down {
     color: red;
 }
 

@@ -22,7 +22,8 @@ function load_assets(page) {
             json.data.forEach(entry => {
                 const symbol = entry.symbol;
                 const name = entry.name;
-                const change = entry.metrics.market_data.percent_change_usd_last_1_hour;
+                let change = entry.metrics.market_data.percent_change_usd_last_1_hour;
+                change = change ? change.toFixed(2) : change
                 const price = entry.metrics.market_data.price_usd;
                 display_entry(symbol, name, change, price, entry.slug);
             });
@@ -41,39 +42,58 @@ function load_assets(page) {
 
 // Display loaded entries
 function display_entry(symbol, name, change, price, slug) {
-    const entries = document.querySelector(".entries");
+    const entries = document.querySelector(".entries")
     // Define required divs
-    let entry_a = document.createElement('a');
-    let symbol_div = document.createElement('div');
-    let name_div = document.createElement('div');
-    let change_div = document.createElement('div');
-    let price_div = document.createElement('div');
+    let entry_a = document.createElement('a')
+    let icon = document.createElement('img')
+    let symbol_div = document.createElement('div')
+    let name_div = document.createElement('div')
+    let change_div = document.createElement('div')
+    let price_div = document.createElement('div')
 
     // Define divs classes
-    entry_a.classList = "entry";
-    entry_a.href = `info/${slug}`;
-    symbol_div.classList = "symbol";
-    name_div.classList = "name";
-    change_div.classList = "change";
-    price_div.classList = "price";
+    entry_a.classList = "entry"
+    entry_a.href = `info/${slug}`
+
+    icon.classList = "icon"
+
+
+    let req = new Request(`static/icons/${symbol.toLowerCase()}.svg`)
+
+    fetch(req)
+        .then(resp => {
+            if (resp.status == 404) {
+                icon.src = `static/icons/generic.svg`
+            } else {
+                icon.src = `static/icons/${symbol.toLowerCase()}.svg`
+            }
+        })
+
+    symbol_div.classList = "symbol"
+    name_div.classList = "name"
+    change_div.classList = "change"
+    price_div.classList = "price"
 
     // Insert values into divs
     symbol_div.innerHTML = symbol;
     name_div.innerHTML = name;
     if (change < 0) {
-        change_div.innerHTML = '<i class="fas fa-arrow-alt-circle-down"></i>';
+        change_div.innerHTML = `<i class="fas fa-caret-down"></i> <span>${change}%</span>`;
+        change_div.classList.add("down")
     } else if (change > 0) {
-        change_div.innerHTML = '<i class="fas fa-arrow-alt-circle-up"></i>';
+        change_div.innerHTML = `<i class="fas fa-caret-up"></i> <span>${change}%</span>`;
+        change_div.classList.add("up")
     } else {
-        change_div.innerHTML = '<i class="fas fa-minus-circle"></i>';
+        change_div.innerHTML = `<span>0.00%</span>`
     }
 
-    price_div.innerHTML = "$" + price.toFixed(2);
+    price_div.innerHTML = displayDollars(price);
 
-    entry_a.appendChild(symbol_div);
-    entry_a.appendChild(name_div);
-    entry_a.appendChild(change_div);
-    entry_a.appendChild(price_div);
+    entry_a.append(icon)
+    entry_a.append(symbol_div)
+    entry_a.append(name_div)
+    entry_a.append(change_div)
+    entry_a.append(price_div)
 
     entries.appendChild(entry_a);
 

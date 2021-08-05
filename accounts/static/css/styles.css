@@ -38,18 +38,19 @@ a {
 
 .entries {
     width: 420px;
-    margin: 0 auto 0 auto;
+    margin: 10px auto 0 auto;
 }
 
 .entry  {
     display: flex;
     background-color: #022d46;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
-    text-align: center;
     max-width: 400px;
-    margin: 2px auto 2px auto;
+    margin: 4px auto;
     color: #ccc;
+    align-items: center;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
 }
 
 .entry:hover {
@@ -59,16 +60,36 @@ a {
 }
 
 .entry .icon {
-    height: 23px;
+    height: 26px;
+    margin: 5px;
+}
+
+.entry .name-symbol {
+    margin: 0 auto 0 10px;
 }
 
 .entry .symbol {
     width: 70px;
     font-weight: 600;
+    font-size: 14px;
+    margin-top: -7px;
+    color: #aaa;
+}
+
+.entry .name {
+    font-size: 18px;
+}
+
+.entry .change-price {
+    text-align: center;
+    flex-basis: 140px;
+    text-align: right;
+    margin-right: 10px;
 }
 
 .entry .change {
-    margin-left: auto;
+    margin-top: -5px;
+    font-size: 14px;
 }
 
 .entry .up {
@@ -77,10 +98,6 @@ a {
 
 .entry .down {
     color: red;
-}
-
-.entry .price {
-    width: 85px;
 }
 
 .info_field {

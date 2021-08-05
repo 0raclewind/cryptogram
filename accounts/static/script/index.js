@@ -46,8 +46,10 @@ function display_entry(symbol, name, change, price, slug) {
     // Define required divs
     let entry_a = document.createElement('a')
     let icon = document.createElement('img')
+    let name_symbol_div = document.createElement('div')
     let symbol_div = document.createElement('div')
     let name_div = document.createElement('div')
+    let change_price_div = document.createElement('div')
     let change_div = document.createElement('div')
     let price_div = document.createElement('div')
 
@@ -69,32 +71,37 @@ function display_entry(symbol, name, change, price, slug) {
             }
         })
 
+    name_symbol_div.classList = "name-symbol"
     symbol_div.classList = "symbol"
     name_div.classList = "name"
+    change_price_div.classList = "change-price"
     change_div.classList = "change"
     price_div.classList = "price"
 
     // Insert values into divs
-    symbol_div.innerHTML = symbol;
+    symbol_div.innerHTML = symbol
     name_div.innerHTML = name;
     if (change < 0) {
-        change_div.innerHTML = `<i class="fas fa-caret-down"></i> <span>${change}%</span>`;
+        change_div.innerHTML = `<i class="fas fa-caret-down"></i> <span>${change}%</span>`
         change_div.classList.add("down")
     } else if (change > 0) {
-        change_div.innerHTML = `<i class="fas fa-caret-up"></i> <span>${change}%</span>`;
+        change_div.innerHTML = `<i class="fas fa-caret-up"></i> <span>${change}%</span>`
         change_div.classList.add("up")
     } else {
         change_div.innerHTML = `<span>0.00%</span>`
     }
 
-    price_div.innerHTML = displayDollars(price);
+    price_div.innerHTML = displayDollars(price)
 
     entry_a.append(icon)
-    entry_a.append(symbol_div)
-    entry_a.append(name_div)
-    entry_a.append(change_div)
-    entry_a.append(price_div)
 
-    entries.appendChild(entry_a);
+    name_symbol_div.append(name_div)
+    name_symbol_div.append(symbol_div)
+    entry_a.append(name_symbol_div)
 
+    change_price_div.append(price_div)
+    change_price_div.append(change_div)
+    entry_a.append(change_price_div)
+
+    entries.appendChild(entry_a)
 }

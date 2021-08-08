@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render
 
-from .models import User
+from .models import User, Portfolio
 from .forms import UserForm, ProfileForm
 
 
@@ -53,6 +53,8 @@ def register(request):
     try:
         user = User.objects.create_user(username, '', password)
         user.save()
+        cash = Portfolio(user=user, symbol="USD", name="Dollar", amount=10000)
+        cash.save()
     except IntegrityError:
         return HttpResponse("Username already exists")
 
@@ -87,4 +89,16 @@ def profile_view(request):
         })
 
 def info_view(request, slug):
-    return render(request, 'info.html')
+    cash = Portfolio.objects.get(user=request.user, symbol="USD").amount
+
+    try:
+        crypto = Portfolio.objects.filter(user=request.user, slug=slug)[0].amount
+    except IndexError:
+        crypto = 0
+
+    print(crypto)
+
+    return render(request, 'info.html', {
+        "cash": cash,
+        "crypto_amount": crypto
+    })

@@ -1,6 +1,7 @@
 // Global constant SLUG variable
 const slug = window.location.pathname.split('/')[2]
 let symbol
+let price
 
 document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll(".time-buttons div");
@@ -27,7 +28,7 @@ function asset_history(timeframe = 0) {
     const history_mock = 'https://localhost:3000/asset_history';
     let values = { labels: [], data: [] }
 
-    fetch(history_url)
+    fetch(history_mock)
         .then(response => response.json())
         .then(json => {
 
@@ -50,7 +51,7 @@ function display_info() {
 
     let profile = document.querySelector('.asset_profile');
 
-    fetch(asset_profile_url)
+    fetch(asset_profile_mock)
         .then(response => response.json())
         .then(json => {
             symbol = json.data.symbol
@@ -100,10 +101,10 @@ function asset_metrics() {
     const metrics_url = `https://data.messari.io/api/v1/assets/${slug}/metrics?fields=all_time_high/price,marketcap/current_marketcap_usd,market_data/price_usd,supply/circulating,market_data/volume_last_24_hours`;
     const metrics_mock = 'https://localhost:3000/metrics';
 
-    fetch(metrics_url)
+    fetch(metrics_mock)
         .then(response => response.json())
         .then(json => {
-            let price = json.data.market_data.price_usd;
+            price = json.data.market_data.price_usd;
             let cap = json.data.marketcap.current_marketcap_usd;
             let volume = json.data.market_data.volume_last_24_hours;
             let supply = json.data.supply.circulating;
@@ -157,6 +158,9 @@ let form = document.querySelector('.trade-window form')
 let tradeWindow = document.querySelector(".trade-window")
 let backdrop = document.querySelector('.backdrop')
 
+let cryptoInput = document.querySelector(".trade-window .crypto input")
+let cashInput = document.querySelector(".trade-window .cash input")
+
 form.onsubmit = displayWarning
 
 function displayWarning(e) {
@@ -189,14 +193,26 @@ convert.addEventListener('click', () => {
         title.innerHTML = 'Buy'
         submitBtn.value = `Buy ${symbol} with USD`
         form.action = '/buy'
+        cryptoInput.style.color = '#2f922f'
+        cashInput.style.color = '#db2a2a'
     } else {
         convert.dataset.status = 'sell'
         convert.innerHTML = '<i class="fas fa-arrow-down">'
         title.innerHTML = 'Sell'
         submitBtn.value = `Sell ${symbol} for USD`
         form.action = '/sell'
+        cryptoInput.style.color = '#db2a2a'
+        cashInput.style.color = '#2f922f'
     }
 })
+
+function calculateCash() {
+    cashInput.value = (cryptoInput.value * price).toFixed(2)
+}
+
+function calculateCrypto() {
+    cryptoInput.value = (cashInput.value / price).toFixed(7)
+}
 
 function dateCalc(time) {
     let today = new Date()

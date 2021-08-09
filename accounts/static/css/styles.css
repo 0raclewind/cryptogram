@@ -282,6 +282,14 @@ a {
     font-size: 20px;
 }
 
+.trade-window .crypto input {
+    color: #db2a2a;
+}
+
+.trade-window .cash input {
+    color: #2f922f;
+}
+
 .trade-window .input input:focus {
     outline: none;
 }

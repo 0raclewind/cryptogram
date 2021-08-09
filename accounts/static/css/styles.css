@@ -326,6 +326,11 @@ a {
     font-size: 14px;
 }
 
+.submit:disabled {
+    color: #777;
+    background: #333;
+}
+
 .trade-window .convert {
     position: relative;
     background: #044971;

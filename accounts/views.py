@@ -96,8 +96,6 @@ def info_view(request, slug):
     except IndexError:
         crypto = 0
 
-    print(crypto)
-
     return render(request, 'info.html', {
         "cash": cash,
         "crypto_amount": crypto

@@ -157,11 +157,16 @@ let submitBtn = document.querySelector('.trade-window .submit')
 let form = document.querySelector('.trade-window form')
 let tradeWindow = document.querySelector(".trade-window")
 let backdrop = document.querySelector('.backdrop')
+let cryptoWarning = document.querySelector('.trade-window .crypto .warning')
+let cashWarning = document.querySelector('.trade-window .cash .warning')
 
 let cryptoInput = document.querySelector(".trade-window .crypto input")
 let cashInput = document.querySelector(".trade-window .cash input")
 
-form.onsubmit = displayWarning
+let cryptoBalance = document.querySelector('.trade-window .crypto .balance span')
+let cashBalance = document.querySelector('.trade-window .cash .balance span')
+
+// form.onsubmit = displayWarning
 
 function displayWarning(e) {
     e.preventDefault()
@@ -195,6 +200,7 @@ convert.addEventListener('click', () => {
         form.action = '/buy'
         cryptoInput.style.color = '#2f922f'
         cashInput.style.color = '#db2a2a'
+        calculateCash()
     } else {
         convert.dataset.status = 'sell'
         convert.innerHTML = '<i class="fas fa-arrow-down">'
@@ -203,15 +209,79 @@ convert.addEventListener('click', () => {
         form.action = '/sell'
         cryptoInput.style.color = '#db2a2a'
         cashInput.style.color = '#2f922f'
+        calculateCash()
     }
 })
 
 function calculateCash() {
-    cashInput.value = (cryptoInput.value * price).toFixed(2)
+    let c = cryptoInput.value
+    cashInput.value = (c * price).toFixed(2)
+
+    if (c.startsWith('.')) {
+        cryptoInput.value = "0" + c
+    }
+
+    if ((parseFloat(c) <= 0) ||
+        (c == "")) {
+        submitBtn.disabled = true
+        cryptoWarning.innerHTML = ""
+    }
+
+    if (convert.dataset.status == "sell") {
+        cashWarning.innerHTML = ""
+        if (cryptoBalance.innerHTML < c) {
+            cryptoWarning.innerHTML = "Exceeds balance"
+            submitBtn.disabled = true
+        } else {
+            cryptoWarning.innerHTML = ""
+            submitBtn.disabled = false
+        }
+    } else {
+        cryptoWarning.innerHTML = ""
+        if (parseFloat(cashBalance.dataset.cash) < cashInput.value) {
+            console.log(parseFloat(cashBalance.dataset.cash));
+            cashWarning.innerHTML = "Exceeds balance"
+            submitBtn.disabled = true
+        } else {
+            cashWarning.innerHTML = ""
+            submitBtn.disabled = false
+        }
+    }
 }
 
 function calculateCrypto() {
+    let c = cashInput.value
     cryptoInput.value = (cashInput.value / price).toFixed(7)
+
+    if (c.startsWith('.')) {
+        cashInput.value = "0" + c
+    }
+
+    if ((parseFloat(c) <= 0) ||
+        (c == "")) {
+        submitBtn.disabled = true
+        cashWarning.innerHTML = ""
+    }
+
+    if (convert.dataset.status == "sell") {
+        cashWarning.innerHTML = ""
+        if (cryptoBalance.innerHTML < cryptoInput.value) {
+            cryptoWarning.innerHTML = "Exceeds balance"
+            submitBtn.disabled = true
+        } else {
+            cryptoWarning.innerHTML = ""
+            submitBtn.disabled = false
+        }
+    } else {
+        cryptoWarning.innerHTML = ""
+        if (parseFloat(cashBalance.dataset.cash) < cashInput.value) {
+            cashWarning.innerHTML = "Exceeds balance"
+            submitBtn.disabled = true
+        } else {
+            cashWarning.innerHTML = ""
+            submitBtn.disabled = false
+        }
+    }
 }
 
 function dateCalc(time) {

@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     // Display dollars as balance
-    let cash = document.querySelector(".trade-window .cash .balance span")
-    cash.innerHTML = displayDollars(parseFloat(cash.dataset.cash))
+    let cashBalance = document.querySelector(".trade-window .cash .balance span")
+    cashBalance.innerHTML = displayDollars(parseFloat(cashBalance.dataset.cash))
 });
 
 function asset_history(timeframe = 0) {
@@ -200,7 +200,6 @@ convert.addEventListener('click', () => {
         form.action = '/buy'
         cryptoInput.style.color = '#2f922f'
         cashInput.style.color = '#db2a2a'
-        calculateCash()
     } else {
         convert.dataset.status = 'sell'
         convert.innerHTML = '<i class="fas fa-arrow-down">'
@@ -209,13 +208,17 @@ convert.addEventListener('click', () => {
         form.action = '/sell'
         cryptoInput.style.color = '#db2a2a'
         cashInput.style.color = '#2f922f'
-        calculateCash()
     }
+    calculateCash()
 })
 
 function calculateCash() {
     let c = cryptoInput.value
-    cashInput.value = (c * price).toFixed(2)
+    if (parseFloat(c) > 0) {
+        cashInput.value = (c * price).toFixed(2)
+    } else {
+        cashInput.value = ""
+    }
 
     if (c.startsWith('.')) {
         cryptoInput.value = "0" + c
@@ -225,33 +228,37 @@ function calculateCash() {
         (c == "")) {
         submitBtn.disabled = true
         cryptoWarning.innerHTML = ""
-    }
-
-    if (convert.dataset.status == "sell") {
         cashWarning.innerHTML = ""
-        if (cryptoBalance.innerHTML < c) {
-            cryptoWarning.innerHTML = "Exceeds balance"
-            submitBtn.disabled = true
+    } else {
+        if (convert.dataset.status == "sell") {
+            cashWarning.innerHTML = ""
+            if (cryptoBalance.innerHTML < c) {
+                cryptoWarning.innerHTML = "Exceeds balance"
+                submitBtn.disabled = true
+            } else {
+                cryptoWarning.innerHTML = ""
+                submitBtn.disabled = false
+            }
         } else {
             cryptoWarning.innerHTML = ""
-            submitBtn.disabled = false
-        }
-    } else {
-        cryptoWarning.innerHTML = ""
-        if (parseFloat(cashBalance.dataset.cash) < cashInput.value) {
-            console.log(parseFloat(cashBalance.dataset.cash));
-            cashWarning.innerHTML = "Exceeds balance"
-            submitBtn.disabled = true
-        } else {
-            cashWarning.innerHTML = ""
-            submitBtn.disabled = false
+            if (parseFloat(cashBalance.dataset.cash) < cashInput.value) {
+                cashWarning.innerHTML = "Exceeds balance"
+                submitBtn.disabled = true
+            } else {
+                cashWarning.innerHTML = ""
+                submitBtn.disabled = false
+            }
         }
     }
 }
 
 function calculateCrypto() {
     let c = cashInput.value
-    cryptoInput.value = (cashInput.value / price).toFixed(7)
+    if (parseFloat(c) > 0) {
+        cryptoInput.value = (cashInput.value / price).toFixed(7)
+    } else {
+        cryptoInput.value = ""
+    }
 
     if (c.startsWith('.')) {
         cashInput.value = "0" + c
@@ -261,25 +268,26 @@ function calculateCrypto() {
         (c == "")) {
         submitBtn.disabled = true
         cashWarning.innerHTML = ""
-    }
-
-    if (convert.dataset.status == "sell") {
-        cashWarning.innerHTML = ""
-        if (cryptoBalance.innerHTML < cryptoInput.value) {
-            cryptoWarning.innerHTML = "Exceeds balance"
-            submitBtn.disabled = true
+        cryptoWarning.innerHTML = ""
+    } else {
+        if (convert.dataset.status == "sell") {
+            cashWarning.innerHTML = ""
+            if (cryptoBalance.innerHTML < cryptoInput.value) {
+                cryptoWarning.innerHTML = "Exceeds balance"
+                submitBtn.disabled = true
+            } else {
+                cryptoWarning.innerHTML = ""
+                submitBtn.disabled = false
+            }
         } else {
             cryptoWarning.innerHTML = ""
-            submitBtn.disabled = false
-        }
-    } else {
-        cryptoWarning.innerHTML = ""
-        if (parseFloat(cashBalance.dataset.cash) < cashInput.value) {
-            cashWarning.innerHTML = "Exceeds balance"
-            submitBtn.disabled = true
-        } else {
-            cashWarning.innerHTML = ""
-            submitBtn.disabled = false
+            if (parseFloat(cashBalance.dataset.cash) < cashInput.value) {
+                cashWarning.innerHTML = "Exceeds balance"
+                submitBtn.disabled = true
+            } else {
+                cashWarning.innerHTML = ""
+                submitBtn.disabled = false
+            }
         }
     }
 }

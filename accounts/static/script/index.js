@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function load_assets(page) {
     const assets = `https://data.messari.io/api/v2/assets?page=${page}&fields=name,slug,symbol,metrics/market_data/percent_change_usd_last_1_hour,metrics/market_data/price_usd`;
     const assets_mock = 'https://localhost:3000/assets';
-    fetch(assets_mock)
+    fetch(assets)
         .then(response => {
             return response.json();
         })
@@ -58,7 +58,6 @@ function display_entry(symbol, name, change, price, slug) {
     entry_a.href = `info/${slug}`
 
     icon.classList = "icon"
-
 
     let req = new Request(`static/icons/${symbol.toLowerCase()}.svg`)
 

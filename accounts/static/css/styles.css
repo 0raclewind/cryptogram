@@ -172,6 +172,35 @@ a {
     border-radius: 5px;
 }
 
+.vallet {
+    margin: 10px auto 0 auto;
+    border-radius: 10px;
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #022d46;
+}
+
+.vallet .title {
+    font-size: 20px;
+    /* font-weight: 600; */
+}
+
+.vallet .investment {
+    text-align: right;
+}
+
+.vallet .value {
+    font-size: 16px;
+    color: #ccc;
+}
+
+.vallet .holdings {
+    font-size: 14px;
+    margin-top: -5px;
+}
+
 .trade-btn {
     background: #044971;
     border-radius: 10px;

@@ -20,6 +20,15 @@
             <div data-time=180>6m</div>
             <div data-time=365>1y</div>
         </div>
+        {% if crypto_amount > 0 %}
+            <div class="vallet">
+                <div class="title"><span class=symbol></span> vallet</div>
+                <div class="investment">
+                    <div class="value"></div>
+                    <div class="holdings">{{ crypto_amount }} <span class="symbol"></span></div>
+                </div>
+            </div>
+        {% endif %}
         <div class="trade-btn">Trade</div>
         <div class="info">
             <div class="overview">
@@ -79,33 +88,36 @@
     </div>
     <div class="trade-window">
         <div class="header">
-          <div class="close-trade"><i class="fas fa-times"></i></div>
-          <div class=title><span>Sell</span> <span class="symbol"></span></div>
-          <div class="price">1 <span class="symbol"></span> = <span class=price></span></div>
+            <div class="close-trade"><i class="fas fa-times"></i></div>
+            <div class=title><span>Sell</span> <span class="symbol"></span></div>
+            <div class="price">1 <span class="symbol"></span> = <span class=price></span></div>
         </div>
-        <form action="/sell" method="POST">
-          <div class="crypto">
-            <div class="initial">
-              <div class="symbol"></div>
-              <div class="balance">Balance: <span>{{ crypto_amount }}</span></div>
+        <form action='' method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="name" hidden>
+            <input type="hidden" name="symbol" hidden>
+            <div class="crypto">
+                <div class="initial">
+                <div class="symbol"></div>
+                <div class="balance">Balance: <span>{{ crypto_amount }}</span></div>
+                </div>
+                <div class="input">
+                <input type="number" step=0.0000001 name=crypto placeholder=0 onkeyup="calculateCash()">
+                <div class="warning"></div>
+                </div>
             </div>
-            <div class="input">
-              <input type="number" step=0.0000001 name=crypto placeholder=0 onkeyup="calculateCash()">
-              <div class="warning"></div>
+            <div class="convert" data-status=sell><i class="fas fa-arrow-down"></i></div>
+            <div class="cash">
+                <div class="initial">
+                <div class="usd-symbol">USD</div>
+                <div class="balance">Balance: <span data-cash="{{ cash }}"></span></div>
+                </div>
+                <div class="input">
+                <input type="number" step=0.01 name=cash placeholder=0 onkeyup="calculateCrypto()">
+                <div class="warning"></div>
+                </div>
             </div>
-          </div>
-          <div class="convert" data-status=sell><i class="fas fa-arrow-down"></i></div>
-          <div class="cash">
-            <div class="initial">
-              <div class="usd-symbol">USD</div>
-              <div class="balance">Balance: <span data-cash="{{ cash }}"></span></div>
-            </div>
-            <div class="input">
-              <input type="number" step=0.01 name=cash placeholder=0 onkeyup="calculateCrypto()">
-              <div class="warning"></div>
-            </div>
-          </div>
-          <input class=submit type="submit" disabled>
+            <input class=submit type="submit" disabled>
         </form>
       </div>
       <div class="backdrop"></div>

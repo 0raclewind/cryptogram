@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -100,3 +102,43 @@ def info_view(request, slug):
         "cash": cash,
         "crypto_amount": crypto
     })
+
+def buy_view(request, slug):
+    crypto = Decimal(request.POST["crypto"])
+    cash = Decimal(request.POST["cash"])
+    name = request.POST["name"]
+    symbol = request.POST["symbol"]
+
+    user_cash = Portfolio.objects.get(user=request.user, symbol="USD")
+
+    if user_cash.amount >= cash:
+        try:
+            crypto_obj = Portfolio.objects.get(user=request.user, slug=slug)
+            crypto_obj.amount = crypto_obj.amount + crypto
+            crypto_obj.save()
+        except Portfolio.DoesNotExist:
+            crypto_obj = Portfolio(user=request.user, symbol=symbol, slug=slug, name=name, amount=crypto)
+            crypto_obj.save()
+        user_cash.amount = user_cash.amount - cash
+        user_cash.save()
+    
+    return HttpResponseRedirect(f'/info/{slug}')
+
+def sell_view(request, slug):
+    crypto = Decimal(request.POST['crypto'])
+    cash = Decimal(request.POST['cash'])
+
+    user_crypto = Portfolio.objects.get(user=request.user, slug=slug)
+    user_cash = Portfolio.objects.get(user=request.user, symbol='USD')
+
+    if user_crypto.amount >= crypto:
+        user_crypto.amount = user_crypto.amount - crypto
+        if user_crypto.amount == 0:
+            user_crypto.delete()
+        else:
+            user_crypto.save()
+
+        user_cash.amount = user_cash.amount + cash
+        user_cash.save()
+
+    return HttpResponseRedirect(f'/info/{slug}')

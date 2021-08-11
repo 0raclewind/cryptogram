@@ -13,12 +13,15 @@
         <title>Cryptogram</title>
         <link href="{% static 'css/styles.css' %}" rel="stylesheet">
         <link href="{% static 'icon.svg' %}" rel="icon" type="image/svg">
+        {% block style %}
+        {% endblock style %}
     </head>
 <body>
     <div class=page-title>Cryptogram</div>
     <div class="menu">
         {% if user.is_authenticated %}
             <a href="{% url 'index' %}">Index</a>
+            <a href="{% url 'portfolio' %}">Portfolio</a>
             <a href="{% url 'profile' %}">Profile</a>
             <a href="{% url 'logout' %}">Logout</a>
         {% endif %}

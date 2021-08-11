@@ -1,0 +1,23 @@
+{% include 'layout.html' %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'css/portfolio.css' %}" rel="stylesheet">
+{% endblock style %}
+
+{% block body %}
+    {% for asset in portfolio %}
+    <a href="#" class="asset" data-slug="{{ asset.slug }}">
+        <img src="">
+        <div class="name-symbol">
+            <div class="name">{{ asset.name }}</div>
+            <div class="symbol">{{ asset.symbol }}</div>
+        </div>
+        <div class="holdings"><span>{{ asset.amount }}</span> <span>{{ asset.symbol }}</span></div>
+    </a>
+    {% endfor %}
+{% endblock body %}
+
+{% block script %}
+    <script src="{% static 'script/portfolio.js' %}"></script>
+{% endblock script %}

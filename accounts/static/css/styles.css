@@ -180,25 +180,34 @@ a {
     justify-content: space-between;
     align-items: center;
     background-color: #022d46;
+    width: 80%;
+}
+
+.vallet img {
+    height: 24px;
+    margin-right: 10px;
 }
 
 .vallet .title {
-    font-size: 20px;
+    font-size: 19px;
+    color: #ccc;
     /* font-weight: 600; */
 }
 
 .vallet .investment {
     text-align: right;
+    margin-left: auto;
 }
 
 .vallet .value {
-    font-size: 16px;
+    font-size: 14px;
     color: #ccc;
 }
 
 .vallet .holdings {
-    font-size: 14px;
+    font-size: 12px;
     margin-top: -5px;
+    color: #999;
 }
 
 .trade-buttons {

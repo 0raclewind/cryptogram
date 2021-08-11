@@ -5,7 +5,7 @@ let price
 
 document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll(".time-buttons div");
-    display_info(slug)
+    display_info()
 
     // Timeframe buttons highlight
     buttons.forEach(button => {
@@ -23,12 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
     cashBalance.innerHTML = displayDollars(parseFloat(cashBalance.dataset.cash))
 });
 
-function asset_history(timeframe = 0) {
+function asset_history(timeframe) {
     const history_url = `https://data.messari.io/api/v1/assets/${slug}/metrics/price/time-series?start=${timeframe}&interval=1d&timestamp-format=rfc3339&fields=values`;
     const history_mock = 'https://localhost:3000/asset_history';
     let values = { labels: [], data: [] }
 
-    fetch(history_url)
+    fetch(history_mock)
         .then(response => response.json())
         .then(json => {
             json.data.values.forEach(value => {
@@ -50,7 +50,7 @@ function display_info() {
 
     let profile = document.querySelector('.asset_profile');
 
-    fetch(asset_profile_url)
+    fetch(asset_profile_mock)
         .then(response => response.json())
         .then(json => {
             symbol = json.data.symbol
@@ -103,7 +103,7 @@ function asset_metrics() {
     const metrics_url = `https://data.messari.io/api/v1/assets/${slug}/metrics?fields=all_time_high/price,marketcap/current_marketcap_usd,market_data/price_usd,supply/circulating,market_data/volume_last_24_hours`;
     const metrics_mock = 'https://localhost:3000/metrics';
 
-    fetch(metrics_url)
+    fetch(metrics_mock)
         .then(response => response.json())
         .then(json => {
             price = json.data.market_data.price_usd;
@@ -126,10 +126,9 @@ function asset_metrics() {
 }
 
 function render_chart(values) {
-    // let ctx = document.getElementById('myChart');
     let canvas = document.querySelector("#myChart");
     let ctx = canvas.getContext("2d");
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -175,12 +174,9 @@ let cashBalance = document.querySelector('.trade-window .cash .balance span')
 // Initialize form action link
 form.action = `/sell/${slug}`
 
-document.querySelector(".trade-btn").onclick = () => {
-    tradeWindow.style.opacity = "1"
-    backdrop.style.display = 'block'
-    tradeWindow.style.transform = "translateX(-50%) scale(1)"
-    document.querySelector('.crypto input').focus()
-}
+document.querySelector(".buy-btn").onclick = displayTradeWindow
+document.querySelector(".sell-btn").onclick = displayTradeWindow
+convert.onclick = changeAction
 
 document.querySelector(".close-trade").onclick = () => {
     tradeWindow.style.transform = "translateX(-50%) scale(0)"
@@ -190,10 +186,24 @@ document.querySelector(".close-trade").onclick = () => {
         document.querySelector('.cash input').value = null
         document.querySelector('.crypto .warning').innerHTML = ""
         document.querySelector('.cash .warning').innerHTML = ""
+        if (convert.dataset.status == 'buy') {
+            changeAction()
+        }
     }, 200)
 }
 
-convert.addEventListener('click', () => {
+function displayTradeWindow() {
+    if (this.dataset.action == 'buy') {
+        changeAction()
+    }
+
+    tradeWindow.style.opacity = "1"
+    backdrop.style.display = 'block'
+    tradeWindow.style.transform = "translateX(-50%) scale(1)"
+    document.querySelector('.crypto input').focus()
+}
+
+function changeAction() {
     if (convert.dataset.status == 'sell') {
         convert.dataset.status = 'buy'
         convert.innerHTML = '<i class="fas fa-arrow-up">'
@@ -214,7 +224,7 @@ convert.addEventListener('click', () => {
         form.action = `/sell/${slug}`
     }
     calculateCash()
-})
+}
 
 function calculateCash() {
     let c = cryptoInput.value
@@ -307,7 +317,6 @@ function dateCalc(time) {
 
     return newDate.toISOString().split("T")[0]
 }
-
 
 function displayBigNumber(number) {
     // Nine Zeroes for Billions

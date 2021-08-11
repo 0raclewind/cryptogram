@@ -100,7 +100,7 @@ def info_view(request, slug):
 
     return render(request, 'info.html', {
         "cash": cash,
-        "crypto_amount": crypto
+        "crypto_amount": float(crypto)
     })
 
 def buy_view(request, slug):

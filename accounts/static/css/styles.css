@@ -201,6 +201,11 @@ a {
     margin-top: -5px;
 }
 
+.trade-buttons {
+    display: flex;
+    justify-content: center;
+}
+
 .trade-btn {
     background: #044971;
     border-radius: 10px;

@@ -142,3 +142,10 @@ def sell_view(request, slug):
         user_cash.save()
 
     return HttpResponseRedirect(f'/info/{slug}')
+
+def portfolio(request):
+    user_portfolio = Portfolio.objects.filter(user=request.user)
+    print(user_portfolio)
+    return render(request, "portfolio.html", {
+        "portfolio": user_portfolio
+    })

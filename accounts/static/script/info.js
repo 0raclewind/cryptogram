@@ -58,6 +58,13 @@ function display_info() {
                 smb.innerHTML = symbol
             })
 
+            let icon = document.querySelector('.vallet img')
+            icon.src = `/static/icons/${symbol.toLowerCase()}.svg`
+            icon.addEventListener("error", (e) => {
+                e.target.src = '/static/icons/generic.svg'
+                e.onerror = null
+            })
+
             document.querySelector('.trade-window .submit').value = `Sell ${symbol} for USD`
             profile.querySelector('.name').innerHTML = json.data.name;
             document.querySelector('.trade-window input[name="name"]').value = json.data.name

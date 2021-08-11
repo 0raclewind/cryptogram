@@ -59,16 +59,11 @@ function display_entry(symbol, name, change, price, slug) {
 
     icon.classList = "icon"
 
-    let sym = symbol.toLowerCase()
-
-    fetch(`static/icons/${sym}.svg`)
-        .then(resp => {
-            if (resp.status == 404) {
-                icon.src = `static/icons/generic.svg`
-            } else {
-                icon.src = `static/icons/${sym}.svg`
-            }
-        })
+    icon.src = `static/icons/${symbol.toLowerCase()}.svg`
+    icon.addEventListener('error', (e) => {
+        e.target.src = 'static/icons/generic.svg'
+        e.onerror = null
+    })
 
     name_symbol_div.classList = "name-symbol"
     symbol_div.classList = "symbol"

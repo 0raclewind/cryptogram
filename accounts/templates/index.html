@@ -1,6 +1,10 @@
 {% extends 'layout.html' %}
 {% load static %}
 
+{% block style %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% endblock style %}
+
 {% block body %}
     <!-- {% if user.first_name %}
         <h4>Welcome, {{ user.first_name }} {{ user.last_name }}</h4>

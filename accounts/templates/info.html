@@ -1,6 +1,10 @@
 {% extends 'layout.html' %}
 {% load static %}
 
+{% block style %}
+    <link href="{% static 'css/info.css' %}" rel="stylesheet">
+{% endblock style %}
+
 {% block body %}
     <div class="asset_profile" hidden>
         <div class="head">

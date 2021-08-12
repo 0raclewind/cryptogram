@@ -1,0 +1,57 @@
+.topup {
+    margin: 20px 10px;
+    padding: 15px 20px;
+    background: #022d46;
+    border-radius: 10px;
+}
+
+.topup .title {
+    font-size: 18px;
+}
+
+.topup .desc {
+    color: #777;
+    font-size: 14px;
+    margin: 10px 0 15px;
+}
+
+.topup .topup-btn {
+    background-color: #076195;
+    width: 140px;
+    color: #ccc;
+    text-align: center;
+    padding: 5px 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.message {
+    opacity: 0;
+    position: absolute;
+    background: #022d46;
+    padding: 10px 15px;
+    border-radius: 10px;
+    width: 300px;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    z-index: 2;
+    text-align: center;
+    transition: transform 200ms ease-in-out;
+}
+
+.message .text {
+    font-size: 14px;
+}
+
+.message .btn {
+    background: #076195;
+    color: #ccc;
+    padding: 5px 10px;
+    border: none;
+    line-height: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+}

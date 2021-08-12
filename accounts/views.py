@@ -150,8 +150,12 @@ def portfolio(request):
         "portfolio": user_portfolio
     })
 
-def free(request):
+def topup(request):
     user_cash = Portfolio.objects.get(user=request.user, symbol="USD")
-    user_cash.amount = user_cash.amount + 10000
-    user_cash.save()
-    return HttpResponseRedirect(reverse('portfolio'))
+
+    if user_cash.amount > 1000:
+        return HttpResponse(201)
+    else:
+        user_cash.amount = user_cash.amount + 10000
+        user_cash.save()
+        return HttpResponse(202)

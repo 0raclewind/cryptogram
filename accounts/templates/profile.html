@@ -1,4 +1,9 @@
 {% extends 'layout.html' %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+{% endblock style %}
 
 {% block body %}
     <h2>{{ user }} profile page</h2>
@@ -21,5 +26,21 @@
         <br>
         <input type="submit" value="Update">
     </form>
-    <a href="/free">Free money</a>
+    
+     <div class="topup">
+         <div class="title">Top-up your account by $10,000</div>
+         <div class="desc">You are only allowed to top-up when your cash balance are below $1,000</div>
+         <div class="topup-btn">Top-up</div>
+     </div>
+
+     <div class="message">
+         <div class="text">You've too much money</div>
+         <div class="btn">OK</div>
+     </div>
+
+     <div class="backdrop"></div>
 {% endblock body %}
+
+{% block script %}
+    <script src="{% static 'script/profile.js' %}"></script>
+{% endblock script %}

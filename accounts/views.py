@@ -149,3 +149,9 @@ def portfolio(request):
     return render(request, "portfolio.html", {
         "portfolio": user_portfolio
     })
+
+def free(request):
+    user_cash = Portfolio.objects.get(user=request.user, symbol="USD")
+    user_cash.amount = user_cash.amount + 10000
+    user_cash.save()
+    return HttpResponseRedirect(reverse('portfolio'))

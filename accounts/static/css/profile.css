@@ -49,9 +49,28 @@
 .message .btn {
     background: #076195;
     color: #ccc;
-    padding: 5px 10px;
+    padding: 5px 20px;
     border: none;
     line-height: 18px;
     font-weight: 600;
     margin-top: 10px;
+}
+
+.logout-div {
+    width: 100%;
+    text-align: center;
+}
+
+.logout {
+    background-color: none;
+    color: #d41c1c;
+    border-radius: 15px;
+    font-weight: 600;
+    border: 2px solid #d41c1c;
+    margin: 20px 0 0;
+}
+
+.logout:hover {
+    background-color: #d41c1c;
+    color: #ccc;
 }

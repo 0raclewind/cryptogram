@@ -34,11 +34,15 @@
      </div>
 
      <div class="message">
-         <div class="text">You've too much money</div>
+         <div class="text"></div>
          <div class="btn">OK</div>
      </div>
 
      <div class="backdrop"></div>
+
+     <div class="logout-div">
+        <a href="{% url 'logout' %}" class="logout btn">Logout</a>
+    </div>
 {% endblock body %}
 
 {% block script %}

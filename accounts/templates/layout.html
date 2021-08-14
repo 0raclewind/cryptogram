@@ -18,14 +18,22 @@
     </head>
 <body>
     <div class=page-title>Cryptogram</div>
-    <div class="menu">
-        {% if user.is_authenticated %}
-            <a href="{% url 'index' %}">Index</a>
-            <a href="{% url 'portfolio' %}">Portfolio</a>
-            <a href="{% url 'profile' %}">Profile</a>
-            <a href="{% url 'logout' %}">Logout</a>
-        {% endif %}
-    </div>
+    {% if user.is_authenticated %}
+        <div class="menu">
+            <a href="{% url 'index' %}">
+                <i class="fas fa-home"></i>
+                <div class="text">Home</div>
+            </a>
+            <a href="{% url 'portfolio' %}">
+                <i class="fas fa-suitcase"></i>
+                <div class="text">Portfolio</div>
+            </a>
+            <a href="{% url 'profile' %}">
+                <i class="fas fa-user"></i>
+                <div class="text">Profile</div>
+            </a>
+        </div>
+    {% endif %}
     {% block body %}
     {% endblock body %}
     

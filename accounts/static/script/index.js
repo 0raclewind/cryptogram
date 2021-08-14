@@ -4,7 +4,7 @@ let page_number = 1;
 document.addEventListener('DOMContentLoaded', (event) => {
     load_assets(page_number);
     document.addEventListener('scroll', () => {
-        if (document.body.clientHeight < (window.pageYOffset + window.innerHeight + 1)) {
+        if (document.body.clientHeight < (window.pageYOffset + window.innerHeight - 65)) {
             load_assets(page_number);
         }
     });

@@ -59,17 +59,19 @@ function display_info() {
             })
 
             let icon = document.querySelector('.vallet img')
-            icon.src = `/static/icons/${symbol.toLowerCase()}.svg`
-            icon.addEventListener("error", (e) => {
-                e.target.src = '/static/icons/generic.svg'
-                e.onerror = null
-            })
+
+            if (icon) {
+                icon.src = `/static/icons/${symbol.toLowerCase()}.svg`
+                icon.addEventListener("error", (e) => {
+                    e.target.src = '/static/icons/generic.svg'
+                    e.onerror = null
+                })
+            }
 
             document.querySelector('.trade-window .submit').value = `Sell ${symbol} for USD`
             profile.querySelector('.name').innerHTML = json.data.name;
             document.querySelector('.trade-window input[name="name"]').value = json.data.name
             document.querySelector('.trade-window input[name="symbol"]').value = symbol
-            // profile.querySelector('.tagline').innerHTML = json.data.profile.general.overview.tagline;
             profile.querySelector('.text').innerHTML = json.data.profile.general.overview.project_details;
 
             // Append links to DOM
@@ -120,8 +122,12 @@ function asset_metrics() {
             let high = json.data.all_time_high.price;
 
             // Set vallet holdings value
-            let holdings = parseFloat(document.querySelector(".vallet .holdings").innerText)
-            document.querySelector(".vallet .value").innerText = displayDollars(holdings * price);
+            let holdings = document.querySelector(".vallet .holdings")
+
+            if (holdings) {
+                let investment = parseFloat(holdings.innerText)
+                document.querySelector(".vallet .value").innerText = displayDollars(investment * price);
+            }
 
             document.querySelector('.trade-window .header .price .price').innerHTML = displayDollars(price)
             document.querySelector('.price').innerHTML = displayDollars(price)

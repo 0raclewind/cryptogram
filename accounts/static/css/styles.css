@@ -1,7 +1,12 @@
+html, body {
+    overflow: auto;
+}
+
 body {
-    padding: 5px;
     background-color: #012235;
     color: #aaa;
+    position: relative;
+    margin-bottom: 70px;
 }
 
 a {
@@ -16,17 +21,34 @@ a {
 .menu {
     display: flex;
     justify-content: space-between;
-    width: 280px;
-    margin: 20px auto 0 auto;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: #000a;
+    z-index: 3;
+    backdrop-filter: blur(5px);
+    text-align: center;
+    padding-top: 10px;
+    /* box-shadow: 0 -5px 5px #0004; */
 }
 
 .menu a {
-    padding: 5px;
-    width: 80px;
+    flex-basis: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    color: #888;
+    text-shadow: 2px 2px 2px #000;
+}
+
+.menu i {
+    font-size: 20px;
+}
+
+.menu .text {
     text-align: center;
-    border: 2px solid #aaa;
     border-radius: 5px;
-    color: #aaa;
 }
 
 .backdrop {

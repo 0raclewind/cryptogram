@@ -9,11 +9,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             e.onerror = null
         })
 
+        let amount = asset.querySelector(".holdings span")
+
         if (low_symbol == 'usd') {
-            let cash = asset.querySelector(".holdings span")
-            asset.querySelector(".holdings").innerHTML = displayDollars(parseFloat(cash.innerText))
+            asset.querySelector(".holdings").innerHTML = displayDollars(parseFloat(amount.innerText))
         } else {
             asset.href = `/info/${asset.dataset.slug}`
+            amount.innerText = parseFloat(amount.innerText)
         }
 
     })

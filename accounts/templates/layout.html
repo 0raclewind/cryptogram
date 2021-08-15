@@ -23,15 +23,15 @@
     <div class=page-title>Cryptogram</div>
     {% if user.is_authenticated %}
         <div class="menu">
-            <a href="{% url 'index' %}">
+            <a href="{% url 'index' %}" class=home>
                 <i class="fas fa-home"></i>
                 <div class="text">Home</div>
             </a>
-            <a href="{% url 'portfolio' %}">
+            <a href="{% url 'portfolio' %}" class=portfolio>
                 <i class="fas fa-suitcase"></i>
                 <div class="text">Portfolio</div>
             </a>
-            <a href="{% url 'profile' %}">
+            <a href="{% url 'profile' %}" class=profile>
                 <i class="fas fa-user"></i>
                 <div class="text">Profile</div>
             </a>

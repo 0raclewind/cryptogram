@@ -6,10 +6,10 @@
 {% endblock style %}
 
 {% block body %}
+
+    <div class=message>Invalid username or password</div>
+
     <div class="forms">
-        {% if message %}
-            <div class=message>{{ message }}</div>
-        {% endif %}
         <div class="login">
             <i class="fas fa-sign-in-alt"></i>
             <h4>Login</h4>
@@ -28,7 +28,7 @@
         </div>
         <div class=register>
             <i class="fas fa-user-plus"></i>
-            <h4>Register</h4>
+            <h4>Sign up</h4>
             <form action="{% url 'register' %}" method=POST>
                 {% csrf_token %}
                 <div class="input-group">
@@ -43,7 +43,7 @@
                     <input type="password" name="confirmation" id=confirm required>
                     <label>Confirm password</label>
                 </div>
-                <input class=submit type="submit" value="Register">
+                <input class=submit type="submit" value="Sign up">
             </form>
         </div>
     </div>

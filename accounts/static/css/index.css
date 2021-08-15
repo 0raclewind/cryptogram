@@ -1,15 +1,15 @@
 .entries {
     width: 95%;
-    margin: 10px auto 0 auto;
+    margin: 20px auto 0 auto;
 }
 
 .entry  {
     display: flex;
     background-color: #022d46;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 10px;
+    border-radius: 10px;
     max-width: 400px;
-    margin: 4px auto;
+    margin: 7px auto;
     color: #ccc;
     align-items: center;
     box-shadow: 2px 2px 2px rgba(0,0,0,0.3);

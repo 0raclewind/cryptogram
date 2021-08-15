@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Goldman&display=swap');
+
 html, body {
     overflow: auto;
 }
@@ -13,9 +15,20 @@ a {
     text-decoration: none;
 }
 
-.page-title {
+.logo-div {
+    width: 100%;
     text-align: center;
-    font-size: 26px;
+}
+
+.logo {
+    height: 50px;
+    margin-top: 10px;
+}
+
+.page-title {
+    font-family: 'Goldman', cursive;
+    text-align: center;
+    display: none;
 }
 
 .menu {

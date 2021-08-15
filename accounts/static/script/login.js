@@ -1,16 +1,19 @@
-let loginForm = document.querySelector(".login");
-let registerForm = document.querySelector(".register");
+let loginForm = document.querySelector(".login")
+let registerForm = document.querySelector(".register")
+let message = document.querySelector('.message')
 let delay = 200;
 
 function loginSelect() {
-    registerForm.style.transform = "rotateY(90deg)";
+    registerForm.style.transform = "rotateY(90deg)"
+    message.style.display = 'none'
     setTimeout(() => {
-        loginForm.style.transform = "rotateY(0deg)";
-    }, delay);
+        loginForm.style.transform = "rotateY(0deg)"
+    }, delay)
 }
 
 function registerSelect() {
     loginForm.style.transform = "rotateY(-90deg)";
+    message.style.display = 'none'
     setTimeout(() => {
         registerForm.style.opacity = 1;
         registerForm.style.transform = "rotateY(0deg)";

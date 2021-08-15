@@ -12,11 +12,14 @@
         <link rel="stylesheet" href="{% static 'css/fa/css/all.css' %}">
         <title>Cryptogram</title>
         <link href="{% static 'css/styles.css' %}" rel="stylesheet">
-        <link href="{% static 'icon.svg' %}" rel="icon" type="image/svg">
+        <link href="{% static 'cg-logo.png' %}" rel="icon" type="image/png">
         {% block style %}
         {% endblock style %}
     </head>
 <body>
+    <div class="logo-div">
+        <img class="logo" src="{% static 'cg-logo.png' %}" alt="">
+    </div>
     <div class=page-title>Cryptogram</div>
     {% if user.is_authenticated %}
         <div class="menu">

@@ -22,17 +22,18 @@ def login_view(request):
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
+        print(username)
 
         user = authenticate(username=username, password=password)
 
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse('index'))
+            # Return 200 if login successfull
+            return HttpResponse(200)
+            # return HttpResponseRedirect(reverse('index'))
         else:
-            return render(request, 'login.html', {
-                'message': 'Invalid username or password.',
-                'userForm': form
-            })
+            # Return HttpResponse 205 if wrong username or password
+            return HttpResponse(205)
 
     return render(request, "login.html", {
         "userForm": form
@@ -50,7 +51,7 @@ def register(request):
 
     # Check if passwords match
     if password != confirmation:
-        return HttpResponse("Password don't match")
+        return HttpResponse(206)
 
     try:
         user = User.objects.create_user(username, '', password)
@@ -58,11 +59,11 @@ def register(request):
         cash = Portfolio(user=user, symbol="USD", name="Dollar", amount=10000)
         cash.save()
     except IntegrityError:
-        return HttpResponse("Username already exists")
+        return HttpResponse(207)
 
     login(request, user)
 
-    return HttpResponseRedirect(reverse('index'))
+    return HttpResponse(200)
 
 @login_required
 def profile_view(request):

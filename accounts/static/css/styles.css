@@ -8,11 +8,27 @@ body {
     background-color: #012235;
     color: #aaa;
     position: relative;
-    margin-bottom: 70px;
+    margin-bottom: 90px;
 }
 
 a {
     text-decoration: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 0px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  -webkit-text-fill-color: #ccc;
+  -webkit-box-shadow: 0 0 0px 1000px #0000 inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .logo-div {
@@ -41,7 +57,7 @@ a {
     z-index: 3;
     backdrop-filter: blur(5px);
     text-align: center;
-    padding-top: 10px;
+    padding: 10px 0;
 }
 
 .menu a {
@@ -52,6 +68,10 @@ a {
     flex-direction: column;
     color: #888;
     text-shadow: 2px 2px 2px #000;
+}
+
+.active {
+    color: #fff !important;
 }
 
 .menu i {
@@ -74,6 +94,64 @@ a {
     z-index: 1;
     height: 100vh;
     overflow-y: hidden;
+}
+
+.input-group input {
+    width: 200px;
+    padding: 15px 10px 0;
+    border: none;
+    margin: 5px 0;
+    background: none;
+    border-bottom: 2px solid #aaa;
+    color: #aaa
+}
+
+
+.input-group input:focus {
+    outline: none;
+}
+
+.input-group label {
+    position: absolute;
+    left: 5px;
+    top: 20px;
+    color: #777;
+    pointer-events: none;
+    transition: 300ms ease-out;
+}
+
+/* Input group settings */
+.input-group input:focus {
+    outline: none;
+    border-bottom-color: #06a;
+}
+  
+.input-group input:focus ~ label {
+    top: 5px;
+    left: 5px;
+    font-size: 12px;
+    color: #06a;
+    font-weight: 700;
+}
+  
+.input-group input:valid ~ label {
+    top: 5px;
+    left: 5px;
+    font-size: 12px;
+    color: #06a;
+    font-weight: 700;
+}
+
+.submit {
+    margin-top: 10px;
+    padding: 5px 20px;
+    background:#044971;
+    color: #ccc;
+    border: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 /* Entry loading animation */
@@ -146,6 +224,7 @@ a {
     }
 }
 
+/* Backdrop filter support */
 @supports not (backdrop-filter: blur(5px)) {
     .menu {
         background: #010a13e8;

@@ -6,26 +6,43 @@
 {% endblock style %}
 
 {% block body %}
-    <h2>{{ user }} profile page</h2>
-    <form action="/profile" method=POST>
-        {% csrf_token %}
-        {{ p_form.as_p }}
-        <hr>
-        <p>
-            <label for="password">Current password</label>
-            <input type="password" id=password name=password>
-        </p>
-        <p>
-            <label for="new_pass">New password</label>
-            <input type="password" id=new_pass name=new_pass>
-        </p>
-        <p>
-            <label for="confirmation">Re-enter new password</label>
-            <input type="password" id=confirmation name=confirmation>
-        </p>
-        <br>
-        <input type="submit" value="Update">
-    </form>
+    <div class="forms">
+        <div class=title><i class="fas fa-user-circle"></i> {{ user }} info</div>
+        <form action="/profile" method=POST>
+            {% csrf_token %}
+            <div class="input-group">
+                {{ p_form.first_name }}
+                <label>First name</label>
+            </div>
+            <div class="input-group">
+                {{ p_form.last_name }}
+                <label>Last name</label>
+            </div>
+            <div class="input-group">
+                {{ p_form.email }}
+                <label>Email address</label>
+            </div>
+            <input type="submit" class=submit value="Update profile">
+        </form>
+        
+        <form action="/password_change" method="POST" class=pass_change>
+            <div class="pass_message"></div>
+            {% csrf_token %}
+            <div class=input-group>
+                <input type="password" name=password required>
+                <label>Current password</label>
+            </div>
+            <div class=input-group>
+                <input type="password" name=new_pass required>
+                <label>New password</label>
+            </div>
+            <div class=input-group>
+                <input type="password" name=confirmation required>
+                <label>Re-enter new password</label>
+            </div>
+            <input type="submit" value="Change password" class=submit>
+        </form>
+    </div>
     
      <div class="topup">
          <div class="title">Top-up your account by $10,000</div>

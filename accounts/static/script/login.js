@@ -81,57 +81,13 @@ function moveTouch(e) {
 
 loginForm.querySelector("form").addEventListener('submit', (e) => {
     e.preventDefault()
-    postFetch(loginForm, '/login')
+    postFetch(loginForm, '/login', message)
 })
 
 registerForm.querySelector("form").addEventListener('submit', (e) => {
     e.preventDefault()
-    postFetch(registerForm, '/register')
+    postFetch(registerForm, '/register', message)
 })
-
-function postFetch(form, url) {
-    let username = form.querySelector('input[name="username"]').value
-    let password = form.querySelector('input[name="password"]').value
-    let confirm = form.querySelector('input[name="confirmation"]')
-
-    let csrf = form.querySelector('input[name="csrfmiddlewaretoken"]').value
-
-    const data = new FormData()
-    data.append('username', username)
-    data.append('password', password)
-    if (confirm) {
-        if (password != confirm.value) {
-            message.innerText = "Passwords doesn't match"
-            return 0
-        } else {
-            data.append('confirmation', confirm.value)
-        }
-    }
-
-
-    fetch(url, {
-        credentials: 'include',
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            "X-CSRFToken": csrf
-        },
-        body: data,
-        redirect: 'follow'
-    })
-        .then(response => response.json())
-        .then(json => {
-            if (json == 205) {
-                message.innerText = "Invalid username or password"
-            } else if (json == 206) {
-                message.innerText = "Passwords doesn't match"
-            } else if (json == 207) {
-                message.innerText = "Username unavailable"
-            } else {
-                window.location.replace("/")
-            }
-        })
-}
 
 function clearValues(values) {
     values.forEach(value => {

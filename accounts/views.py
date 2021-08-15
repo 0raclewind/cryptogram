@@ -20,7 +20,7 @@ def index(request):
 def login_view(request):
     form = UserForm(auto_id=False)
     if request.method == "POST":
-        username = request.POST["username"]
+        username = request.POST["username"].lower()
         password = request.POST["password"]
         print(username)
 
@@ -30,7 +30,6 @@ def login_view(request):
             login(request, user)
             # Return 200 if login successfull
             return HttpResponse(200)
-            # return HttpResponseRedirect(reverse('index'))
         else:
             # Return HttpResponse 205 if wrong username or password
             return HttpResponse(205)
@@ -45,12 +44,13 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('login'))
 
 def register(request):
-    username = request.POST["username"]
+    username = request.POST["username"].lower()
     password = request.POST["password"]
     confirmation = request.POST["confirmation"]
 
     # Check if passwords match
     if password != confirmation:
+        # Return 206 if passwords don't match, this is also handled at frontend
         return HttpResponse(206)
 
     try:
@@ -59,6 +59,7 @@ def register(request):
         cash = Portfolio(user=user, symbol="USD", name="Dollar", amount=10000)
         cash.save()
     except IntegrityError:
+        # Return 207 if user exists
         return HttpResponse(207)
 
     login(request, user)
@@ -70,20 +71,8 @@ def profile_view(request):
     if request.method == "POST":
         p_form = ProfileForm(request.POST, instance=request.user)
 
-        password = request.POST["password"]
-        new_pass = request.POST["new_pass"]
-        confirmation = request.POST["confirmation"]
-        user = authenticate(username=request.user, password=password)
-
         if p_form.is_valid():
             p_form.save()
-            # Check if password change requested, current password correct and new passwords matching
-            if user and new_pass == confirmation:
-                u = User.objects.get(username=request.user)
-                u.set_password(new_pass)
-                u.save()
-                new_user = authenticate(username=request.user, password=new_pass)
-                login(request, new_user)
             return HttpResponseRedirect(reverse('index'))
     else:
         p_form = ProfileForm(instance=request.user)
@@ -91,6 +80,25 @@ def profile_view(request):
             "p_form": p_form
         })
 
+@login_required
+def password_change_view(request):
+    password = request.POST["password"]
+    new_pass = request.POST["new_pass"]
+    confirmation = request.POST["confirmation"]
+    user = authenticate(username=request.user, password=password)
+
+    # Check if password change requested, current password correct and new passwords matching
+    if user and new_pass == confirmation:
+            u = User.objects.get(username=request.user)
+            u.set_password(new_pass)
+            u.save()
+            new_user = authenticate(username=request.user, password=new_pass)
+            login(request, new_user)
+            return HttpResponse(209)
+    else:
+        return HttpResponse(208)
+
+@login_required
 def info_view(request, slug):
     cash = Portfolio.objects.get(user=request.user, symbol="USD").amount
 
@@ -104,6 +112,7 @@ def info_view(request, slug):
         "crypto_amount": float(crypto)
     })
 
+@login_required
 def buy_view(request, slug):
     crypto = Decimal(request.POST["crypto"])
     cash = Decimal(request.POST["cash"])

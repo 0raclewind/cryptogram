@@ -12,5 +12,6 @@ urlpatterns = [
     path('buy/<str:slug>', views.buy_view, name='buy'),
     path('sell/<str:slug>', views.sell_view, name='sell'),
     path('portfolio', views.portfolio, name="portfolio"),
-    path('topup', views.topup, name="topup")
+    path('topup', views.topup, name="topup"),
+    path('password_change', views.password_change_view, name="password change")
 ]

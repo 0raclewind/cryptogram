@@ -42,7 +42,6 @@ a {
     backdrop-filter: blur(5px);
     text-align: center;
     padding-top: 10px;
-    /* box-shadow: 0 -5px 5px #0004; */
 }
 
 .menu a {
@@ -146,3 +145,10 @@ a {
         flex-basis: 33%;
     }
 }
+
+@supports not (backdrop-filter: blur(5px)) {
+    .menu {
+        background: #010a13e8;
+
+    }
+  }

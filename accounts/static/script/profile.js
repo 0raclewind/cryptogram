@@ -1,3 +1,6 @@
+let password_form = document.querySelector(".pass_change")
+let pass_message = document.querySelector(".pass_message")
+
 document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelector(".topup-btn").onclick = () => {
         fetch('/topup')
@@ -10,6 +13,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 }
             })
     }
+
+    password_form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        postFetch(password_form, '/password_change', pass_message)
+    })
 })
 
 function displayMessage(msg) {
@@ -26,3 +34,4 @@ function displayMessage(msg) {
         window.location.replace("/portfolio")
     }
 }
+

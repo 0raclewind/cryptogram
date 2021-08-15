@@ -29,8 +29,7 @@ body {
     display: flex;
     position: relative;
     height: 250px;
-    width: 80%;
-    left: 0;
+    width: 300px;
     margin-top: 20px;
     perspective: 600px;
     text-align: center;
@@ -65,63 +64,6 @@ body {
 .register {
     opacity: 0;
     transform: rotateY(90deg);
-}
-
-.input-group input {
-    width: 200px;
-    padding: 15px 10px 5px;
-    border: none;
-    margin: 5px 0;
-    background: none;
-    border-bottom: 2px solid #aaa;
-    color: #aaa
-}
-
-
-.input-group input:focus {
-    outline: none;
-}
-
-.input-group label {
-    position: absolute;
-    left: 5px;
-    top: 20px;
-    color: #777;
-    pointer-events: none;
-    transition: 300ms ease-out;
-}
-
-.input-group input:focus {
-    outline: none;
-    border-bottom-color: #06a;
-}
-  
-.input-group input:focus ~ label {
-    top: 5px;
-    left: 5px;
-    font-size: 12px;
-    color: #06a;
-    font-weight: 700;
-}
-  
-.input-group input:valid ~ label {
-    top: 5px;
-    left: 5px;
-    font-size: 12px;
-    color: #06a;
-    font-weight: 700;
-}
-
-.submit {
-    margin-top: 10px;
-    padding: 5px 20px;
-    background:#044971;
-    color: #ccc;
-    border: none;
-    border-radius: 10px;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
 }
 
 .swipe {

@@ -1,6 +1,6 @@
 .asset_profile {
     margin: 0 auto 0 auto;
-    width: 90%;
+    width: 95%;
 }
 
 .asset_profile .chart, .overview, .info .resources, .info .market-stats {
@@ -30,7 +30,7 @@
 }
 
 .chart {
-    height: 250px;
+    /* height: 250px; */
 }
 
 .time-buttons {
@@ -63,7 +63,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #022d46;
-    width: 80%;
+    width: 100%;
 }
 
 .vallet img {
@@ -305,7 +305,7 @@
 }
 
 .market-stats .stats-title {
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
     font-weight: 600;
 }

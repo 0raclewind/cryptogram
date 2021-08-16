@@ -22,13 +22,18 @@ img {
     text-align: right;
 }
 
+.name {
+    font-weight: 600;
+}
+
 .name, .holdings {
     color: #ccc;
 }
 
 .symbol {
     font-size: 12px;
-    color: #999;
+    color: #777;
+    font-weight: 600;
     margin-top: -5px;
 }
 

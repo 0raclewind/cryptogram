@@ -31,6 +31,10 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+.bar {
+    display: flex;
+}
+
 .logo-div {
     width: 100%;
     text-align: center;
@@ -199,6 +203,14 @@ select:-webkit-autofill:focus {
     }
 }
 
+/* Backdrop filter support */
+@supports not (backdrop-filter: blur(5px)) {
+    .menu {
+        background: #010a13e8;
+
+    }
+}
+
 @media screen and (min-width: 400px) {
     .asset_profile {
         width: 390px;
@@ -224,10 +236,17 @@ select:-webkit-autofill:focus {
     }
 }
 
-/* Backdrop filter support */
-@supports not (backdrop-filter: blur(5px)) {
-    .menu {
-        background: #010a13e8;
-
+@media screen and (min-width: 768px) {
+    .bar {
+        background-color: #000a;
+        position: fixed;
+        width: 100%;
     }
-  }
+
+    .menu {
+        position: relative;
+        top: 0;
+        bottom: inherit;
+        background: none;
+    }
+}

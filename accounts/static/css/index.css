@@ -35,11 +35,12 @@
     font-weight: 600;
     font-size: 14px;
     margin-top: -7px;
-    color: #aaa;
+    color: #777;
 }
 
 .entry .name {
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .entry .change-price {

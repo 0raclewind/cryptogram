@@ -21,16 +21,16 @@
     color: #eee;
 }
 
-.entry .icon {
+.icon {
     height: 26px;
     margin: 5px;
 }
 
-.entry .name-symbol {
+.name-symbol {
     margin: 0 auto 0 10px;
 }
 
-.entry .symbol {
+.symbol {
     width: 70px;
     font-weight: 600;
     font-size: 14px;
@@ -38,28 +38,28 @@
     color: #777;
 }
 
-.entry .name {
+.name {
     font-size: 16px;
     font-weight: 600;
 }
 
-.entry .change-price {
+.change-price {
     text-align: center;
     flex-basis: 140px;
     text-align: right;
     margin-right: 10px;
 }
 
-.entry .change {
+.change {
     margin-top: -5px;
     font-size: 14px;
 }
 
-.entry .up {
+.up {
     color: green;
 }
 
-.entry .down {
+.down {
     color: red;
 }
 
@@ -69,4 +69,26 @@
     height: 500px;
     border:1px solid #aaa;
     position: fixed;
+}
+
+@media screen and (min-width: 768px) {
+    .entries {
+        margin-top: 100px;
+    }
+
+    .entry {
+        max-width: 500px;
+    }
+
+    .name, .price {
+        font-size: 18px;
+    }
+
+    .symbol, .change {
+        font-size: 16px;
+    }
+
+    .icon {
+        height: 35px;
+    }
 }

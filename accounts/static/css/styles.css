@@ -31,27 +31,70 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-.bar {
+nav {
+    width: 100%;
+}
+
+.desktop-nav {
+    background-color: #000a;
+    width: 100%;
+    display: none;
+    justify-content: center;
+    position: fixed;
+    backdrop-filter: blur(5px);
+}
+
+.desktop-nav .menu-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 768px;
+    padding: 10px 20px;
+}
+
+.desktop-nav .brand {
+    color: #ccc;
     display: flex;
 }
 
-.logo-div {
+.desktop-nav .logo {
+    height: 50px;
+}
+
+.desktop-nav .brand-title {
+    font-family: Goldman, sans-serif;
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.desktop-nav .menu * {
+    margin: 0 5px;
+    padding: 5px;
+    font-size: 20px;
+    color: #ccc;
+}
+
+.desktop-nav .menu *:hover {
+    color: #fff;
+}
+
+.mobile-nav {
     width: 100%;
     text-align: center;
 }
 
-.logo {
+.mobile-nav .logo {
     height: 50px;
     margin-top: 10px;
 }
 
-.page-title {
+.mobile-nav .page-title {
     font-family: 'Goldman', cursive;
     text-align: center;
     display: none;
 }
 
-.menu {
+.mobile-nav .menu {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -64,7 +107,7 @@ select:-webkit-autofill:focus {
     padding: 10px 0;
 }
 
-.menu a {
+.mobile-nav .menu a {
     flex-basis: 30%;
     display: flex;
     align-items: center;
@@ -74,15 +117,15 @@ select:-webkit-autofill:focus {
     text-shadow: 2px 2px 2px #000;
 }
 
-.active {
+.mobile-nav .active {
     color: #fff !important;
 }
 
-.menu i {
+.mobile-nav .menu i {
     font-size: 20px;
 }
 
-.menu .text {
+.mobile-nav .menu .text {
     text-align: center;
     border-radius: 5px;
 }
@@ -237,16 +280,11 @@ select:-webkit-autofill:focus {
 }
 
 @media screen and (min-width: 768px) {
-    .bar {
-        background-color: #000a;
-        position: fixed;
-        width: 100%;
+    .mobile-nav {
+        display: none;
     }
 
-    .menu {
-        position: relative;
-        top: 0;
-        bottom: inherit;
-        background: none;
+    .desktop-nav {
+        display: flex;
     }
 }

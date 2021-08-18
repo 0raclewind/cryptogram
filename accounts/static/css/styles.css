@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Goldman&display=swap');
 
 html, body {
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 body {
@@ -28,6 +28,7 @@ select:-webkit-autofill:focus {
   border-bottom: 2px solid #ccc;
   -webkit-text-fill-color: #ccc;
   -webkit-box-shadow: 0 0 0px 1000px #0000 inset;
+  box-shadow: 0 0 0px 1000px #0000 inset;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -117,7 +118,7 @@ nav {
     text-shadow: 2px 2px 2px #000;
 }
 
-.mobile-nav .active {
+.active {
     color: #fff !important;
 }
 
@@ -280,6 +281,10 @@ nav {
 }
 
 @media screen and (min-width: 768px) {
+    body {
+        margin-bottom: 30px;
+    }
+
     .mobile-nav {
         display: none;
     }

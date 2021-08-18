@@ -96,7 +96,7 @@
     transform: translateX(-50%) scale(0);
     z-index: 2;
     text-align: center;
-    transition: transform 200ms ease-in-out;
+    transition: transform 300ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 .message .text {
@@ -118,8 +118,7 @@
     text-align: center;
 }
 
-.logout {
-    background-color: none;
+.logout, .credits {
     color: #d41c1c;
     border-radius: 15px;
     font-weight: 600;
@@ -130,6 +129,22 @@
 .logout:hover {
     background-color: #d41c1c;
     color: #ccc;
+}
+
+.sub-info {
+    text-align: center;
+}
+
+.version {
+    color: #555;
+    margin: 30px 0 10px;
+}
+
+.credits {
+    color: #777;
+    border: 2px solid #777;
+    width: 100px;
+    margin-top: 10px;
 }
 
 @media screen and (min-width: 480px) {

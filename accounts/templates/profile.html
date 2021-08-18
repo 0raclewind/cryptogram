@@ -6,8 +6,8 @@
 {% endblock style %}
 
 {% block body %}
+    <div class=profile-title><i class="fas fa-user-circle"></i> {{ user }} info</div>
     <div class="forms">
-        <div class=title><i class="fas fa-user-circle"></i> {{ user }} info</div>
         <form action="/profile" method=POST>
             {% csrf_token %}
             <div class="input-group">
@@ -59,6 +59,11 @@
 
      <div class="logout-div">
         <a href="{% url 'logout' %}" class="logout btn">Logout</a>
+    </div>
+
+    <div class="sub-info">
+        <div class="version">Version: 1.0</div>
+        <a href="#" class="credits btn">Credits</a>
     </div>
 {% endblock body %}
 

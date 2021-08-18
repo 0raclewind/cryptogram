@@ -29,10 +29,6 @@
     font-weight: 400;
 }
 
-.chart {
-    /* height: 250px; */
-}
-
 .time-buttons {
     display: flex;
     background-color: #022d46;
@@ -329,4 +325,23 @@
 
 .market-stats .stats > * :nth-child(2) {
     flex-basis: 80%;
+}
+
+@media screen and (min-width: 480px) {
+    .asset_profile {
+        max-width: 480px;
+    }
+
+    .market-stats .stats > * {
+        flex-direction: column;
+        flex: 0 0 23%;
+        height: 100px;
+        flex-flow: column;justify-content: space-evenly;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .asset_profile {
+        margin-top: 100px;
+    }
 }

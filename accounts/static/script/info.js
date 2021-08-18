@@ -24,11 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function asset_history(timeframe) {
-    const history_url = `https://data.messari.io/api/v1/assets/${slug}/metrics/price/time-series?start=${timeframe}&interval=1d&timestamp-format=rfc3339&fields=values`;
+    const history = `https://data.messari.io/api/v1/assets/${slug}/metrics/price/time-series?start=${timeframe}&interval=1d&timestamp-format=rfc3339&fields=values`;
     const history_mock = 'https://localhost:3000/asset_history';
     let values = { labels: [], data: [] }
 
-    fetch(history_mock)
+    fetch(history)
         .then(response => response.json())
         .then(json => {
             json.data.values.forEach(value => {
@@ -45,12 +45,12 @@ function asset_history(timeframe) {
 }
 
 function display_info() {
-    const asset_profile_url = `https://data.messari.io/api/v2/assets/${slug}/profile?fields=name,symbol,profile/general/overview/tagline,profile/general/overview/project_details,profile/general/overview/official_links`;
+    const asset_profile = `https://data.messari.io/api/v2/assets/${slug}/profile?fields=name,symbol,profile/general/overview/tagline,profile/general/overview/project_details,profile/general/overview/official_links`;
     const asset_profile_mock = 'https://localhost:3000/profile';
 
     let profile = document.querySelector('.asset_profile');
 
-    fetch(asset_profile_mock)
+    fetch(asset_profile)
         .then(response => response.json())
         .then(json => {
             symbol = json.data.symbol
@@ -109,10 +109,10 @@ function display_info() {
 }
 
 function asset_metrics() {
-    const metrics_url = `https://data.messari.io/api/v1/assets/${slug}/metrics?fields=all_time_high/price,marketcap/current_marketcap_usd,market_data/price_usd,supply/circulating,market_data/volume_last_24_hours`;
+    const metrics = `https://data.messari.io/api/v1/assets/${slug}/metrics?fields=all_time_high/price,marketcap/current_marketcap_usd,market_data/price_usd,supply/circulating,market_data/volume_last_24_hours`;
     const metrics_mock = 'https://localhost:3000/metrics';
 
-    fetch(metrics_mock)
+    fetch(metrics)
         .then(response => response.json())
         .then(json => {
             price = json.data.market_data.price_usd;

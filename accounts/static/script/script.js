@@ -1,10 +1,13 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     if (window.location.pathname == "/") {
-        document.querySelector(".menu .home").classList.add("active")
+        document.querySelector(".desktop-nav .home").classList.add("active")
+        document.querySelector(".mobile-nav .home").classList.add("active")
     } else if (window.location.pathname == "/profile") {
-        document.querySelector(".menu .profile").classList.add("active")
+        document.querySelector(".desktop-nav .profile").classList.add("active")
+        document.querySelector(".mobile-nav .profile").classList.add("active")
     } else if (window.location.pathname == "/portfolio") {
-        document.querySelector(".menu .portfolio").classList.add("active")
+        document.querySelector(".desktop-nav .portfolio").classList.add("active")
+        document.querySelector(".mobile-nav .portfolio").classList.add("active")
     }
 })
 

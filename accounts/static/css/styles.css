@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Goldman&display=swap');
 
 html, body {
-    /* overflow: auto; */
+    overflow: none;
 }
 
 body {
@@ -281,8 +281,13 @@ nav {
 }
 
 @media screen and (min-width: 768px) {
+    html, body {
+        overflow: auto;
+    }
+
     body {
         margin-bottom: 30px;
+        padding-bottom: 10px;
     }
 
     .mobile-nav {

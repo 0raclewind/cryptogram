@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'css/credits.css' %}" rel="stylesheet">
+{% endblock style %}
+
+{% block title %}Credits{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="title">CREDITS</div>
+        <div class="desc">Big thanks to all these libraries, communities and people who support them. Without it this project wouldn't be possible.</div>
+        <div class="communities">
+            <div class="com">
+                <div class="name"><i class="fab fa-stack-overflow"></i> Stack<strong>overflow</strong></div>
+                <div class="desc">For function used to convert big numbers and overall support when needed.</div>
+                <a href="https://stackoverflow.com/questions/36734201/how-to-convert-numbers-to-million-in-javascript" target=_blank>Big numbers function forum thread</a>
+            </div>
+            <div class="com">
+                <div class="name">Crypto Icons <strong>API</strong></div>
+                <div class="desc">For amazing crypto currency icon library which was necessary for UI/UX development.</div>
+                <a href="https://cryptoicons.org/" target=_blank>Crypto Icons API website</a>
+            </div>
+            <div class="com">
+                <div class="name"><img src="https://messari.io/favicon-96x96.png" alt=""> Messari's Crypto Data API</strong></div>
+                <div class="desc">Which provides a free API for crypto prices, market data metrics, on-chain metrics, and qualitative information.</div>
+                <a href="https://messari.io/" target=_blank>Messari's website</a>
+            </div>
+            <div class="com">
+                <div class="name"><img src="https://www.chartjs.org/docs/latest/favicon.ico" alt=""> ChartJS</div>
+                <div class="desc">For Simple yet flexible JavaScript charting.</div>
+                <a href="https://www.chartjs.org/docs/latest/" target=_blank>ChartJS website</a>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

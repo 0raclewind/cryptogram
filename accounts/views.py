@@ -134,6 +134,7 @@ def buy_view(request, slug):
     
     return HttpResponseRedirect(f'/info/{slug}')
 
+@login_required
 def sell_view(request, slug):
     crypto = Decimal(request.POST['crypto'])
     cash = Decimal(request.POST['cash'])
@@ -153,12 +154,14 @@ def sell_view(request, slug):
 
     return HttpResponseRedirect(f'/info/{slug}')
 
+@login_required
 def portfolio(request):
     user_portfolio = Portfolio.objects.filter(user=request.user).order_by('id')
     return render(request, "portfolio.html", {
         "portfolio": user_portfolio
     })
 
+@login_required
 def topup(request):
     user_cash = Portfolio.objects.get(user=request.user, symbol="USD")
 
@@ -168,3 +171,6 @@ def topup(request):
         user_cash.amount = user_cash.amount + 10000
         user_cash.save()
         return HttpResponse(202)
+
+def credits_view(request):
+    return render(request, 'credits.html')

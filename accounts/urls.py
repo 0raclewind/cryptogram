@@ -13,5 +13,6 @@ urlpatterns = [
     path('sell/<str:slug>', views.sell_view, name='sell'),
     path('portfolio', views.portfolio, name="portfolio"),
     path('topup', views.topup, name="topup"),
-    path('password_change', views.password_change_view, name="password change")
+    path('password_change', views.password_change_view, name="password change"),
+    path('credits', views.credits_view, name="credits")
 ]

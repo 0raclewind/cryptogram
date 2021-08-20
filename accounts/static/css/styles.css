@@ -11,7 +11,7 @@ body {
     margin-bottom: 90px;
 }
 
-a {
+a, a:hover {
     text-decoration: none;
 }
 

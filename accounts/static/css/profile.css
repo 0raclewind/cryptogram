@@ -147,6 +147,11 @@
     margin-top: 10px;
 }
 
+.credits:hover {
+    color: #ccc;
+    border: 2px solid #ccc;
+}
+
 @media screen and (min-width: 480px) {
 }
 

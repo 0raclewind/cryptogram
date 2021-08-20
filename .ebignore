@@ -1,0 +1,7 @@
+venv
+.vscode
+migrations
+__pycache__
+__init__.py
+.env
+static

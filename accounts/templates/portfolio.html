@@ -1,9 +1,11 @@
-{% include 'layout.html' %}
+{% extends 'layout.html' %}
 {% load static %}
 
 {% block style %}
     <link href="{% static 'css/portfolio.css' %}" rel="stylesheet">
 {% endblock style %}
+
+{% block title %}Portfolio{% endblock title %}
 
 {% block body %}
     <div class="title"><i class="fas fa-suitcase"></i> Portfolio</div>

@@ -5,6 +5,8 @@
     <link href="{% static 'css/profile.css' %}" rel="stylesheet">
 {% endblock style %}
 
+{% block title %}Profile{% endblock title %}
+
 {% block body %}
     <div class=profile-title><i class="fas fa-user-circle"></i> {{ user }} info</div>
     <div class="forms">
@@ -63,7 +65,7 @@
 
     <div class="sub-info">
         <div class="version">Version: 1.0</div>
-        <a href="#" class="credits btn">Credits</a>
+        <a href="{% url 'credits' %}" class="credits btn">Credits</a>
     </div>
 {% endblock body %}
 

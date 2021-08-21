@@ -163,6 +163,8 @@
 
     .forms {
         flex-direction: row;
+        max-width: 720px;
+        margin: 0 auto;
     }
 
     .topup {

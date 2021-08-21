@@ -1,11 +1,14 @@
+// Global variable for generating static files
+const aws = 'https://cryptogram-static.s3.amazonaws.com/static/'
+
 document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelectorAll('.asset').forEach(asset => {
         let low_symbol = asset.querySelector('.symbol').innerText.toLowerCase()
         let icon = asset.querySelector('img')
 
-        icon.src = `/static/icons/${low_symbol}.svg`
+        icon.src = `${aws}icons/${low_symbol}.svg`
         icon.addEventListener("error", (e) => {
-            e.target.src = '/static/icons/generic.svg'
+            e.target.src = `${aws}icons/generic.svg`
             e.onerror = null
         })
 

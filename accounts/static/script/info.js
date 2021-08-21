@@ -2,6 +2,8 @@
 const slug = window.location.pathname.split('/')[2]
 let symbol
 let price
+// Global variable for generating static files
+const aws = 'https://cryptogram-static.s3.amazonaws.com/static/'
 
 document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll(".time-buttons div");
@@ -24,8 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function asset_history(timeframe) {
-    const history = `https://data.messari.io/api/v1/assets/${slug}/metrics/price/time-series?start=${timeframe}&interval=1d&timestamp-format=rfc3339&fields=values`;
-    const history_mock = 'https://localhost:3000/asset_history';
+    const history = `https://data.messari.io/api/v1/assets/${slug}/metrics/price/time-series?start=${timeframe}&interval=1d&timestamp-format=rfc3339&fields=values`
     let values = { labels: [], data: [] }
 
     fetch(history)
@@ -45,10 +46,9 @@ function asset_history(timeframe) {
 }
 
 function display_info() {
-    const asset_profile = `https://data.messari.io/api/v2/assets/${slug}/profile?fields=name,symbol,profile/general/overview/tagline,profile/general/overview/project_details,profile/general/overview/official_links`;
-    const asset_profile_mock = 'https://localhost:3000/profile';
+    const asset_profile = `https://data.messari.io/api/v2/assets/${slug}/profile?fields=name,symbol,profile/general/overview/tagline,profile/general/overview/project_details,profile/general/overview/official_links`
 
-    let profile = document.querySelector('.asset_profile');
+    let profile = document.querySelector('.asset_profile')
 
     fetch(asset_profile)
         .then(response => response.json())
@@ -61,9 +61,9 @@ function display_info() {
             let icon = document.querySelector('.vallet img')
 
             if (icon) {
-                icon.src = `/static/icons/${symbol.toLowerCase()}.svg`
+                icon.src = `${aws}icons/${symbol.toLowerCase()}.svg`
                 icon.addEventListener("error", (e) => {
-                    e.target.src = '/static/icons/generic.svg'
+                    e.target.src = `${aws}icons/generic.svg`
                     e.onerror = null
                 })
             }
@@ -110,8 +110,7 @@ function display_info() {
 }
 
 function asset_metrics() {
-    const metrics = `https://data.messari.io/api/v1/assets/${slug}/metrics?fields=all_time_high/price,marketcap/current_marketcap_usd,market_data/price_usd,supply/circulating,market_data/volume_last_24_hours`;
-    const metrics_mock = 'https://localhost:3000/metrics';
+    const metrics = `https://data.messari.io/api/v1/assets/${slug}/metrics?fields=all_time_high/price,marketcap/current_marketcap_usd,market_data/price_usd,supply/circulating,market_data/volume_last_24_hours`
 
     fetch(metrics)
         .then(response => response.json())

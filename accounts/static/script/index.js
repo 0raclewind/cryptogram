@@ -1,5 +1,7 @@
 // Initiate page number for loading assets
 let page_number = 1;
+// Global variable for generating static files
+const aws = 'https://cryptogram-static.s3.eu-west-1.amazonaws.com/static/'
 
 document.addEventListener('DOMContentLoaded', (event) => {
     load_assets(page_number);
@@ -59,9 +61,9 @@ function display_entry(symbol, name, change, price, slug) {
 
     icon.classList = "icon"
 
-    icon.src = `static/icons/${symbol.toLowerCase()}.svg`
+    icon.src = `${aws}icons/${symbol.toLowerCase()}.svg`
     icon.addEventListener('error', (e) => {
-        e.target.src = 'static/icons/generic.svg'
+        e.target.src = `${aws}icons/generic.svg`
         e.onerror = null
     })
 

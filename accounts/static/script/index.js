@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 // Get 20 entries
 function load_assets(page) {
-    const assets = `https://data.messari.io/api/v2/assets?page=${page}&fields=name,slug,symbol,metrics/market_data/percent_change_usd_last_1_hour,metrics/market_data/price_usd`;
+    const assets = `https://data.messari.io/api/v2/assets?with-metrics&with-profiles&page=${page}&fields=name,slug,symbol,metrics/market_data/percent_change_usd_last_1_hour,metrics/market_data/price_usd`;
     const assets_mock = 'https://localhost:3000/assets';
     fetch(assets)
         .then(response => {

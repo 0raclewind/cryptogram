@@ -36,11 +36,14 @@
     margin: 10px 0;
 }
 
-
+.harvard {
+    height: 40px !important;
+}
 
 
 @media screen and (min-width: 480px) {
     .container {
+        margin-top: 80px;
         max-width: 480px;
     }
 }

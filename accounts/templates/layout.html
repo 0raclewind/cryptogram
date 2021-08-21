@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         
         <link href="{% static 'css/styles.css' %}" rel="stylesheet">
-        <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
+        <link href="{% static 'img/favicon.png' %}" rel="icon" type="image/png">
         {% block style %}
         {% endblock style %}
         <title>Cryptogram - {% block title %}{% endblock title %}</title>
@@ -19,7 +19,7 @@
             <div class="desktop-nav">
                 <div class="menu-area">
                     <a href="{% url 'index' %}" class="brand">
-                        <img class="logo" src="{% static 'cg-logo.png' %}" alt="">
+                        <img class="logo" src="{% static 'img/cg-logo.png' %}" alt="">
                         <div class=brand-title>Cryptogram</div>
                     </a>
                     <div class="menu">
@@ -37,7 +37,7 @@
 
             <div class="mobile-nav">
                 <a href="{% url 'index' %}" class="brand">
-                    <img class="logo" src="{% static 'cg-logo.png' %}" alt="">
+                    <img class="logo" src="{% static 'img/cg-logo.png' %}" alt="">
                 </a>
                 <div class=page-title>Cryptogram</div>
                 {% if user.is_authenticated %}

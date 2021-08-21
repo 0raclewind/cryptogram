@@ -99,11 +99,12 @@ function display_info() {
                 }
                 a_tag.href = link.link;
                 a_tag.innerHTML = icon + link.name;
+                a_tag.target = "_blank"
                 profile.querySelector('.resources .links').appendChild(a_tag);
             })
         })
         .then(() => {
-            asset_history(dateCalc(7))
+            asset_history(dateCalc(90))
             asset_metrics()
         })
 }

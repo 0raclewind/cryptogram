@@ -9,3 +9,7 @@ fa
 bootstrap-5.0.2
 chart.js-3.5.0
 icons
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

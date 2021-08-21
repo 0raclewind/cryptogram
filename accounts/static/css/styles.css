@@ -205,7 +205,7 @@ nav {
 /* Entry loading animation */
 .loading-div {
     max-width: 400px;
-    margin: 0 auto 0 auto;
+    margin: 100px auto 0 auto;
 }
 
 .loading {

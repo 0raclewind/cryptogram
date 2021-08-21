@@ -9,6 +9,7 @@
     border-radius: 10px;
 }
 
+
 .asset_profile .head {
     display: flex;
     justify-content: space-between;
@@ -343,5 +344,11 @@
 @media screen and (min-width: 768px) {
     .asset_profile {
         margin-top: 100px;
+    }
+    .loading-div {
+        margin: 180px auto 0 auto;
+    }
+    #myChart {
+        height: 222px;
     }
 }

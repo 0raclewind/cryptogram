@@ -259,7 +259,7 @@ function calculateCash() {
     } else {
         if (convert.dataset.status == "sell") {
             cashWarning.innerHTML = ""
-            if (cryptoBalance.innerHTML < c) {
+            if (parseFloat(cryptoBalance.innerHTML) < parseFloat(c)) {
                 cryptoWarning.innerHTML = "Exceeds balance"
                 submitBtn.disabled = true
             } else {

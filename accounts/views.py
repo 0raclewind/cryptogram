@@ -134,7 +134,7 @@ def buy_view(request, slug):
         user_cash.amount = user_cash.amount - cash
         user_cash.save()
     
-    return HttpResponseRedirect(f'/info/{slug}')
+    return HttpResponseRedirect(reverse('portfolio'))
 
 @login_required
 def sell_view(request, slug):
@@ -154,7 +154,7 @@ def sell_view(request, slug):
         user_cash.amount = user_cash.amount + cash
         user_cash.save()
 
-    return HttpResponseRedirect(f'/info/{slug}')
+    return HttpResponseRedirect(reverse('portfolio'))
 
 @login_required
 def portfolio(request):

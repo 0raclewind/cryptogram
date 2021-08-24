@@ -22,7 +22,6 @@ def login_view(request):
     if request.method == "POST":
         username = request.POST["username"].lower()
         password = request.POST["password"]
-        print(username)
 
         user = authenticate(username=username, password=password)
 
@@ -34,9 +33,12 @@ def login_view(request):
             # Return HttpResponse 205 if wrong username or password
             return HttpResponse(205)
 
-    return render(request, "login.html", {
-        "userForm": form
-    })
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('index'))
+    else:
+        return render(request, "login.html", {
+            "userForm": form
+        })
 
 @login_required
 def logout_view(request):

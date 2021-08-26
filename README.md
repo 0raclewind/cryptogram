@@ -5,7 +5,7 @@
 Cryptogram is a cryptocurrency trading web application built with HTML, CSS, Javascript and Django as a backend.
 
 ##### Distinctiveness and Complexity
-Project was created from scratch and not using any project templates from CS50 course. Each template has it's own CSS and JS files associated with it, for easier navigation and development. Also project utilizes ChartJS and Messari's API which was not demonstrated during CS50 course. Additionaly project was deployed to AWS and can be used and tested freely any time.
+Cryptogram is a unique project built from scratch using knowledge acquired during CS50 Web programming course. Each Django template has it's own CSS and JS files associated with it, for easier development process. Project utilizes ChartJS, Messari's API and are deployed to AWS to be used and tested freely any time.
 
 ##### Login / Signup page
 To use application signup is required. For signup system I used Django built in model `django.contrib.auth.models.AbstractUser`.

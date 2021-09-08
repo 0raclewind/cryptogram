@@ -39,6 +39,7 @@ nav {
     justify-content: center;
     position: fixed;
     backdrop-filter: blur(5px);
+    z-index: 10;
 }
 
 .desktop-nav .menu-area {

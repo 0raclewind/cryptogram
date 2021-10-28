@@ -14,6 +14,11 @@ from pathlib import Path
 import environ
 import os
 
+import django_heroku
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
+
 # Read environment file
 env = environ.Env()
 environ.Env.read_env()
@@ -98,6 +103,11 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'sqlite3.sql')
     }
 }
+
+import dj_database_url
+
+db_from_env = dj_database_url.config()
+DATABASES["default"].update(db_from_env)
 
 AUTH_USER_MODEL = 'accounts.User'
 

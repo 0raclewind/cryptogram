@@ -31,7 +31,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.4', '127.0.0.1', 'cryptogram-env.eba-mrii9i8x.eu-west-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['192.168.1.4', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition

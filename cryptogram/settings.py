@@ -31,7 +31,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.4', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['192.168.1.4', '127.0.0.1', 'valdo-cryptogram.herokuapp.com']
 
 
 # Application definition
@@ -145,6 +145,7 @@ AWS_PRELOAD_METADATA = True
 # s3 static settings
 AWS_LOCATION = 'static'
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Default primary key field type

@@ -10,6 +10,7 @@ bootstrap-5.0.2
 chart.js-3.5.0
 icons
 img
+sqlite3.sql
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

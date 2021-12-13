@@ -81,6 +81,7 @@ WSGI_APPLICATION = 'cryptogram.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# External PostgreSQL DB setup
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -99,6 +100,7 @@ DATABASES = {
     }
 }
 
+# DB Setup for internal Heroku DB
 import dj_database_url
 
 db_from_env = dj_database_url.config()
